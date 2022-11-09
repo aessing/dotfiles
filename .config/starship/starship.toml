@@ -1,0 +1,332 @@
+# ~/.config/starship.toml
+
+# Get editor completions based on the config schema
+'$schema' = 'https://starship.rs/config-schema.json'
+
+# Core behavior
+add_newline = true                          # Blank line between prompts
+command_timeout = 1000                      # Command timeout (ms)
+scan_timeout = 30                           # File scan timeout (ms)
+continuation_prompt = '[∙](bright-black) '  # Multiline continuation marker
+
+# Prompt layout (left)
+format = """
+$os\
+$username\
+$hostname\
+$shell\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$jobs\
+$cmd_duration\
+$fill \
+$all\
+$kubernetes\
+$helm\
+$battery\
+$line_break\
+$character
+"""
+
+# OS indicator
+[os]
+disabled = false
+format = '[$symbol]($style) '
+style = 'bold white'
+
+[os.symbols]
+AIX = '➿'
+Alpaquita = '🔔'
+AlmaLinux = ''
+Alpine = ''
+ALTLinux = 'Ⓐ'
+Amazon = ''
+Android = ''
+AOSC = ''
+Arch = '󰣇'
+Artix = ''
+Bluefin = '🐟'
+CachyOS = '🎗️'
+CentOS = ''
+Debian = ''
+DragonFly = ''
+Elementary = ''
+Emscripten = '🔗'
+EndeavourOS = ''
+Fedora = ''
+FreeBSD = ''
+Garuda = ''
+Gentoo = ''
+HardenedBSD = '🛡️'
+Illumos = ''
+Ios = '󰀷'
+InstantOS = '⏲️'
+Kali = ''
+Linux = ''
+Mabox = '📦'
+Macos = ''
+Manjaro = ''
+Mariner = '🌊'
+MidnightBSD = '🌘'
+Mint = ''
+NetBSD = '🚩'
+NixOS = ''
+Nobara = ''
+OpenBSD = ''
+OpenCloudOS = '☁️'
+openEuler = '🦉'
+openSUSE = ''
+OracleLinux = ''
+PikaOS = '🐤'
+Pop = ''
+Raspbian = ''
+RedHatEnterprise = ''
+Redhat = ''
+RockyLinux = ''
+Redox = '🧪'
+Solus = ''
+SUSE = ''
+Ubuntu = ''
+Ultramarine = '🔷'
+Unknown = ''
+Uos = '🐲'
+Void = ''
+Windows = ''
+Zorin = ''
+
+# Identity
+[username]
+disabled = false
+format = '[$user]($style) '
+show_always = true
+style_user = 'bold 221'
+style_root = 'bold 204'
+
+[hostname]
+disabled = false
+format = 'on [$hostname]($style) '
+ssh_only = false
+style = 'bold 117'
+trim_at = '.'
+
+[shell]
+disabled = false
+bash_indicator = ''
+zsh_indicator = ''
+powershell_indicator = ''
+cmd_indicator = ''
+unknown_indicator = ''
+format = 'in [$indicator]($style) '
+style = '243'
+
+# Location
+[directory]
+disabled = false
+format = 'at [$path]($style) [$read_only]($read_only_style)'
+home_symbol = '~'
+read_only = ' '
+read_only_style = 'red'
+style = 'bold 141'
+truncation_length = 3
+truncation_symbol = '…/'
+truncate_to_repo = false
+
+
+# Git
+[git_branch]
+disabled = false
+symbol = ' '
+format = 'on [$symbol$branch(:$remote_branch)]($style) '
+truncation_length = 24
+truncation_symbol = '…'
+style = 'bold 150'
+only_attached = false
+ignore_bare_repo = false
+
+[git_commit]
+disabled = false
+format = '[\($hash$tag\)]($style) '
+style = '150'
+only_detached = true 
+tag_disabled = true
+tag_symbol = '  '
+commit_hash_length = 7
+tag_max_candidates = 0
+
+[git_state]
+disabled = false
+format = '[\($state( $progress_current/$progress_total)\)]($style) '
+rebase = 'REBASING'
+merge ='MERGING'
+revert = 'REVERTING'
+cherry_pick = 'CHERRY-PICKING'
+bisect = 'BISECTING'
+am = 'AM'
+am_or_rebase = 'AM/REBASE'
+style = 'bold 221'
+
+[git_metrics]
+disabled = false
+format = '([+$added]($added_style) )([-$deleted]($deleted_style) )'
+added_style = 'dimmed 150'
+deleted_style = 'dimmed 204'
+only_nonzero_diffs = true
+
+[git_status]
+disabled = false
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = 'bold 204'
+ahead = '⇡${count}'
+behind = '⇣${count}'
+deleted = '✘'
+diverged = '⇕ ⇡${ahead_count} ⇣${behind_count}'
+conflicted = '='
+modified = '!'
+renamed = '»'
+staged = '[+\($count\)](050)'
+stashed = '\$'
+typechanged = ''
+untracked = '?'
+up_to_date = ''
+
+
+# Jobs & timing
+[jobs]
+disabled = false
+format = '[$symbol$number]($style) '
+symbol = ' '
+style = 'bold 243'
+symbol_threshold = 1
+number_threshold = 2
+
+[cmd_duration]
+disabled = false
+min_time = 500
+format = '[ $duration]($style) '
+style = 'italic 243'
+
+
+# Cloud
+[aws]
+disabled = false
+format = 'on [$symbol($profile )(\($region\) )(\[$duration\] )]($style) | '
+symbol = ' '
+style = 'bold 208'
+
+[azure]
+disabled = false
+format = 'on [$symbol($subscription)]($style) | '
+symbol = '󰠅 '
+style = 'bold 117'
+
+[gcloud]
+disabled = false
+format = 'on [$symbol$account(@$domain)(\($region\))]($style) | '
+symbol = '󱇶 '
+style = 'bold 204'
+
+
+# Runtimes & packages
+[dotnet]
+disabled = false
+format = '[$symbol($version)(󰣉 $tfm)]($style) | '
+heuristic = true
+style = 'bold 209'
+symbol = ' '
+version_format = 'v${raw}'
+
+[golang]
+disabled = false
+format = '[$symbol($version)]($style) | '
+version_format = 'v${raw}'
+symbol = '󰟓 '
+style = 'bold 209'
+not_capable_style = 'bold red'
+
+[nodejs]
+disabled = false
+format = '[$symbol($version)]($style) | '
+style = 'bold 209'
+not_capable_style = 'bold red'
+symbol = ' '
+version_format = 'v${raw}'
+
+[package]
+disabled = false
+display_private = false
+format = '[$symbol$version]($style) | '
+style = 'bold 209'
+symbol = '󰏖 '
+version_format = 'v${raw}'
+
+[python]
+disabled = false
+format = '[$symbol${pyenv_prefix}(${version})( \($virtualenv\))]($style) | '
+version_format = 'v${raw}'
+symbol = ' '
+style = 'bold 209'
+pyenv_version_name = false
+
+
+# Kubernetes & Helm
+[kubernetes]
+disabled = false
+format = '[$symbol$context( \($namespace\))]($style) | '
+style = 'bold 117'
+symbol = ' '
+
+[helm]
+disabled = false
+format = '[$symbol($version)]($style) | '
+style = 'bold 117'
+symbol = ' '
+version_format = 'v${raw}'
+
+
+# Battery
+[battery]
+disabled = false
+format = '[$symbol$percentage]($style)'
+charging_symbol = '󰂄 '
+discharging_symbol = '󱟞 '
+empty_symbol = '󰂎 '
+full_symbol = '󰁹 '
+unknown_symbol = '󰂑 '
+
+[[battery.display]]
+style = 'bold 204'
+threshold = 10
+
+[[battery.display]]
+style = 'bold 221'
+threshold = 30
+
+[[battery.display]]
+style = 'bold 150'
+threshold = 100
+
+
+# Prompt separators
+[fill]
+disabled = false
+symbol = ' '
+style = ''
+
+[line_break]
+disabled = false
+
+
+# Prompt character
+[character]
+disabled = false
+format = '$symbol '
+error_symbol = '[✕](bold 204)'
+success_symbol = '[➜](bold 150)'
+vimcmd_symbol = '[](bold 141)'
+vimcmd_replace_one_symbol = '[](bold 141)'
+vimcmd_replace_symbol = '[](bold 141)'
+vimcmd_visual_symbol = '[](bold 221)'

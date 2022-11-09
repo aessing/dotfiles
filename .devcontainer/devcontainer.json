@@ -1,0 +1,64 @@
+{
+  // =============================================================================
+  // Dev Container Configuration for GitHub Codespaces
+  // =============================================================================
+  // This configuration sets up a development environment with dotfiles
+  // automatically installed when a Codespace is created.
+  // =============================================================================
+
+  "name": "Dotfiles Development Environment",
+
+  // Use the universal dev container image (includes common tools)
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+
+  // Features to install in the container
+  "features": {
+    // Common utilities (zsh, git, etc.)
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true,
+      "installOhMyZsh": false,
+      "upgradePackages": true
+    },
+    // GitHub CLI
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    // Starship prompt
+    "ghcr.io/devcontainers-extra/features/starship:1": {},
+    // Zsh plugins (autosuggestions & syntax highlighting)
+    "ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {
+      "plugins": "zsh-autosuggestions zsh-syntax-highlighting",
+      "omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions https://github.com/zsh-users/zsh-syntax-highlighting"
+    }
+  },
+
+  // Run install script after container is created
+  // Also installs uv, specify-cli, and fastfetch
+  "postCreateCommand": "curl -LsSf https://astral.sh/uv/install.sh | sh && export PATH=\"$HOME/.local/bin:$PATH\" && uv tool install specify-cli --from git+https://github.com/github/spec-kit.git && sudo apt-get update && sudo apt-get install -y fastfetch && bash ${containerWorkspaceFolder}/install.sh",
+
+  // Set default shell to zsh
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "zsh": {
+            "path": "/bin/zsh"
+          }
+        }
+      }
+      // Extensions handled by VS Code Settings Sync
+    }
+  },
+
+  // Environment variables
+  "remoteEnv": {
+    "DOTFILES_DIR": "${containerWorkspaceFolder}",
+    "STARSHIP_CONFIG": "${containerWorkspaceFolder}/.config/starship.toml"
+  },
+
+  // Forward ports if needed for web development
+  // "forwardPorts": [3000, 8080],
+
+  // Run as non-root user
+  "remoteUser": "codespace"
+}
