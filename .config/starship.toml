@@ -1,0 +1,157 @@
+﻿# ~/.config/starship.toml
+
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Change command timeout from 500 to 1000 ms
+command_timeout = 1000
+
+# new config
+format = """
+($env_var)\
+($username)\
+($hostname)\
+($directory)\
+($git_branch)\
+($git_status)\
+($dotnet)\
+($nodejs)\
+($package)\
+($azure)\
+($battery)\
+($cmd_duration)\
+($character)"""
+
+# Shows an icon that should be included by zshrc script based on the distribution or os
+[env_var.STARSHIP_DISTRO]
+disabled = false
+format = '[$env_value]($style) '
+style = 'bold white'
+variable = "STARSHIP_DISTRO"
+
+[username]
+disabled = false
+format = "[$user]($style) "
+show_always = true
+style_user = "bold white"
+style_root = "bold red"
+
+[hostname]
+disabled = false
+format = "on [$hostname]($style) "
+ssh_only = false
+style = "bold yellow"
+trim_at = "."
+
+[directory]
+disabled = false
+format = "at [$path]($style)[$read_only]($read_only_style) "
+home_symbol = " ~"
+read_only = " "
+read_only_style = "bold cyan"
+style = "bold 004"
+truncation_length = 1
+truncation_symbol = "…/"
+
+[git_branch]
+disabled = false
+symbol = " "
+format = "via [$symbol$branch(:$remote_branch)]($style) "
+#truncation_length = 24
+truncation_symbol = "…/"
+style = "bold green"
+
+[git_status]
+disabled = false
+format = '[\($all_status$ahead_behind\)]($style) '
+style = "bold green"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+deleted = " "
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+conflicted = "🏳"
+modified = " "
+renamed = "襁 "
+staged = '[++\($count\)](green)'
+stashed = " "
+untracked = " "
+up_to_date = ""
+
+[dotnet]
+disabled = false
+format = "with [$symbol($version)]($style) and [TFM ($tfm)]($style) "
+heuristic = true
+style = "bold 021"
+symbol = ".NET "
+version_format = "v${raw}"
+
+[nodejs]
+disabled = false
+format = "with [$symbol($version)]($style) "
+not_capable_style	= "bold red"
+style = "bold 034"
+symbol = " "
+version_format = "v${raw}"
+
+[package]
+disabled = false
+display_private = false
+format = "with [$symbol$version]($style) "
+style = "bold 208"
+symbol = "PKG "
+version_format = "v${raw}"
+
+[azure]
+disabled = false
+format = "via [$symbol($subscription)]($style) "
+symbol = "ﴃ "
+style = "blue bold"
+
+[docker_context]
+disabled = false
+format = "via [$symbol$context](style) "
+style = "bold blue"
+symbol = " "
+
+[kubernetes]
+disabled = false
+format = 'via [$symbol$context\($namespace\)]($style) '
+style = 'bold purple'
+symbol = 'ﴱ  '
+
+[helm]
+disabled = false
+format = "via [$symbol$version]($style) "
+style = "bold purple"
+symbol = "  "
+version_format = "v${raw}"
+
+[cmd_duration]
+disabled = false
+min_time = 500
+format = "[⏲ $duration](bold 171) "
+
+[battery]
+disabled = false
+format = "[$symbol$percentage]($style) "
+charging_symbol = " "
+discharging_symbol = " "
+empty_symbol = " "
+full_symbol = " "
+unknown_symbol = " "
+
+[[battery.display]]
+style = "bold red"
+threshold = 10
+
+[[battery.display]]
+style = "bold yellow"
+threshold = 30
+
+[character]
+disabled = false
+error_symbol = "[✕](boldm 196)"
+success_symbol = "[➜](bold green)"

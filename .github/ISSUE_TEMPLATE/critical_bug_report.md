@@ -1,5 +1,5 @@
 ---
-name: Critical bug report
+name: Critical Bug Report
 about: Create a report for a critical issue
 title: ''
 labels: 'bug, critical'

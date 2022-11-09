@@ -2,7 +2,7 @@
 
 Below is the guidance for how to report issues, propose new features, and submit contributions via Pull Requests.
 
-## :beetle: Before you start, file an issue
+## :beetle: Before You Start, File an Issue
 
 Please follow this simple rule to help us stop any unnecessary effort and frustration, so we all can ensure an efficient and effective use of everyone's time - yours, ours, and the time of other community members.
 
@@ -10,13 +10,13 @@ Please follow this simple rule to help us stop any unnecessary effort and frustr
 >
 >:exclamation: **For security issues please have a look at the [Security Policy](SECURITY.md)** :exclamation:
 
-### :mag_right: Search existing issues first
+### :mag_right: Search Existing Issues First
 
 Before filing a new issue, search existing open and closed issues first. Perhaps someone else has found the problem you are seeing, and someone may be working on or have already contributed a fix.
 
 If no existing item describes your issue/feature, great - please file a new issue.
 
-### :keyboard: File a new Issue
+### :keyboard: File a New Issue
 
 - You found a security issue and you want to report it? Please have a look at the [Security Policy](SECURITY.md).
 - You have found a bug and you want to report it? Please file an issue with the tag "bug".
@@ -25,7 +25,7 @@ If no existing item describes your issue/feature, great - please file a new issu
 - You have a question that you do not see answered in docs, videos, etc.? Please file an issue with the tag "documentation".
 - You found an existing issue that describes yours? Great - please upvote and add additional commentary / info / repro-steps / etc.
 
-### :pencil: Complete the template
+### :pencil: Complete the Template
 
 Please include as much information as possible in your issue. The more information you provide, the more likely your issue/ask will be understood, accepted, and implemented.
 
@@ -34,7 +34,7 @@ Please include as much information as possible in your issue. The more informati
 - We prefer error message text where possible, or screenshots of errors if the error text cannot be captured.
 - If you intend to implement the fix/feature yourself, please say so! If you do not indicate you want to contribute, we assume that the issue is our to solve.
 
-### :+1: Do not post "+1" comments
+### :+1: Do Not Post "+1" Comments
 
 > Please do not post "+1", "me too", or similar comments - these comments just add noise to an issue.
 
@@ -44,13 +44,13 @@ If you do not have any additional information to add but would like to indicate 
 
 ## :man_technologist: Development
 
-### :toolbox: Fork, Clone, Branch and Create your PR
+### :toolbox: Fork, Clone, Branch and Create Your PR
 
 Once you have filed an issue and discussed your proposed feature/fix, it is time to start development:
 
 1. Fork the repo if you have not already
 2. Clone your fork locally
-3. Create & push a feature branch
+3. Create & push a feature/bugfix branch
 4. Create a [Draft Pull Request](https://github.blog/2019-02-14-introducing-draft-pull-requests/)
 5. Work on your changes
 

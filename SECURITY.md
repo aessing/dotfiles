@@ -23,7 +23,3 @@ Please include the requested information listed below (as much as you can provid
 - Impact of the issue, including how an attacker might exploit the issue
 
 This information will help us to understand your report more quickly.
-
-## :white_flag: Preferred Languages
-
-We prefer all communications to be in English.

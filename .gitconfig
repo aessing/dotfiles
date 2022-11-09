@@ -1,0 +1,44 @@
+[core]
+    autocrlf = false 
+    editor = code --wait
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[user]
+    name = Andre Essing
+    email = 21235652+aessing@users.noreply.github.com
+[alias]
+    br = branch                                         # Shorten branch command
+    changes = diff --name-status -r                     # Show all changed files
+    ci = commit                                         # Shorten the commit command
+    cm = commit -m                                      # Shorten the commit command
+    co = checkout                                       # Shorten the checkout command
+    d = diff                                            # Displays differences between files in different commits or between a commit and the working tree
+    dc = diff --cached                                  # Displays differences between files in different commits or between a commit and the working tree
+    diffstat = diff --stat -r                           # Displays a summary of the changes in a commit
+    dv = difftool -t vimdiff -y                         # Display diffs using vimdiff
+    gl = config --global -l                             # Makes it easier to list all user configurations
+    hist = log --oneline --graph --decorate --all       # Show a history of commits
+    last = log -1 HEAD --stat                           # Shows details about the most recent commit you made
+    lc = log ORIG_HEAD.. --stat --no-merges             # A shortcut for seeing the fetched commits
+    lg = log -p                                         # Shows the commit logs with the diffstat
+    lp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    ll = log --oneline                                  # Display your commits as single lines for more compact output
+    llog = log --date=local                             # Shortcut for displaying dates in your local timezone
+    pl = pull                                           # Shorten the pull command
+    ps = push                                           # Shorten the push command
+    rv = remote -v                                      # Lists all configured remote repositories
+    sb = status -sb                                     # Output a less verbose status with branch information
+    slog = log --graph --all --topo-order --pretty='format:%h %ai %s%d (%an)'
+    st = status                                         # Shorten the status command
+    undo = reset --soft HEAD^                           # Undo the last commit
+    unstage = reset HEAD --                             # Unstage a file
+    who = shortlog -s --                                # Shows a list of contributors 
+[init] 
+    defaultBranch = main 
+[merge]
+    tool = vscode
+[mergetool "vscode"]
+    cmd = "code --wait $MERGED"

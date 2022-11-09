@@ -1,16 +1,13 @@
-#  Project Title
+# Andre's Dotfiles
 
-A README file, along with a repository license, contribution guidelines, and a code of conduct, helps you communicate expectations for and manage contributions to your project.
+This Repository **Dotfiles** contain my personal config files. Here you'll find configs, customizations, themes, and whatever I need to personalize my Linux and mac OS experience.
+## Terminal and Application Icons with Nerd-Fonts
 
-A README is often the first item a visitor will see when visiting your repository. README files typically include information on:
+To display icons in terminal or applications Fonts, I'm using [Nerd-Fonts](https://www.nerdfonts.com). I'm currently using the **CaskaydiaCove Nerd Font Mono** in terminal applications, and **CaskaydiaCove Nerd Font** in applications.
 
-- What the project does
-- Why the project is useful
-- How users can get started with the project
-- Where users can get help with your project
-- Who maintains and contributes to the project
+## Credits
 
-:exclamation: Please also have a look at the [license](LICENSE.md) and if the license fits the needs of your project. :exclamation: 
+This repository is inspired and based on the **Dotfiles** repository by [**Christian Lempa**](https://github.com/ChristianLempa/dotfiles). Thanks Christian!
 
 ---
 

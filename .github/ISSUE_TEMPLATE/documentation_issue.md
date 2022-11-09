@@ -1,5 +1,5 @@
 ---
-name: Documentation issue
+name: Documentation Issue
 about: Report issues in the documentation
 title: ''
 labels: 'documentation'
@@ -29,5 +29,5 @@ assignees: ''
 ## Screenshots
 <!-- If applicable, please add screenshots to help explain your problem. -->
 
-## Additional context
+## Additional Context
 <!-- Please add any other context about the problem here. -->
