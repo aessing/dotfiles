@@ -1,14 +1,18 @@
 [core]
     autocrlf = false 
     editor = code --wait
+
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
     required = true
+
 [user]
     name = Andre Essing
     email = 21235652+aessing@users.noreply.github.com
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHIP1nIC2BEcxQ9u8ONRnyP3Spg2hn2YvQC9xpPVVCO
+
 [alias]
     br = branch                                         # Shorten branch command
     changes = diff --name-status -r                     # Show all changed files
@@ -36,9 +40,21 @@
     undo = reset --soft HEAD^                           # Undo the last commit
     unstage = reset HEAD --                             # Unstage a file
     who = shortlog -s --                                # Shows a list of contributors 
+
 [init] 
     defaultBranch = main 
+
 [merge]
     tool = vscode
+
 [mergetool "vscode"]
     cmd = "code --wait $MERGED"
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[commit]
+  gpgsign = true
