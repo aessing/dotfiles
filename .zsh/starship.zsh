@@ -38,3 +38,7 @@ case $_distro in
 esac
 
 export STARSHIP_DISTRO="$ICON"
+
+if [[ -z ${WARP_IS_LOCAL_SHELL_SESSION} ]]; then
+  export STARSHIP_NOWARP=1
+fi

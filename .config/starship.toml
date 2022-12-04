@@ -14,6 +14,7 @@ format = """
 ($env_var)\
 ($username)\
 ($hostname)\
+($shell)\
 ($directory)\
 ($git_branch)\
 ($git_status)\
@@ -23,6 +24,7 @@ format = """
 ($azure)\
 ($battery)\
 ($cmd_duration)\
+\n\
 ($character)"""
 
 # Shows an icon that should be included by zshrc script based on the distribution or os
@@ -150,6 +152,16 @@ threshold = 10
 [[battery.display]]
 style = "bold yellow"
 threshold = 30
+
+[shell]
+disabled = false
+bash_indicator = ""
+zsh_indicator = ""
+powershell_indicator = "" 
+cmd_indicator = ""
+unknown_indicator = ""
+format = "using [$indicator]($style) " 
+style = "bold 010"
 
 [character]
 disabled = false
