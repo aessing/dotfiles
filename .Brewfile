@@ -2,8 +2,11 @@ tap "azure/bicep"
 tap "azure/functions"
 tap "homebrew/bundle"
 tap "homebrew/cask"
+tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
+# Run your GitHub Actions locally 🚀
+brew "act"
 # Azure Storage data transfer utility
 brew "azcopy"
 # Microsoft Azure CLI 2.0
@@ -32,15 +35,23 @@ brew "teleport"
 brew "azure/bicep/bicep"
 # Azure Functions Core Tools 4.0
 brew "azure/functions/azure-functions-core-tools@4"
-# Draw.io is free online diagram software
-cask "drawio"
-# Explorer for Azure Storage
-cask "microsoft-azure-storage-explorer"
-# Knowledge base that works on top of a local folder of plain text Markdown files
-cask "obsidian"
+# Monospaced font that includes programming ligatures
+cask "font-cascadia-code"
+# Version of Cascadia Code with embedded Powerline symbols
+cask "font-cascadia-code-pl"
+# Version of Cascadia Code without ligatures
+cask "font-cascadia-mono"
+# Version of Cascadia Code without ligatures and with embedded Powerline symbols
+cask "font-cascadia-mono-pl"
+# Developer targeted fonts with a high number of glyphs
+cask "font-caskaydia-cove-nerd-font"
+# Hubot Sans, a variable font from GitHub
+cask "font-hubot-sans"
+# Developer targeted fonts with a high number of glyphs
+cask "font-meslo-lg-nerd-font"
+# Mona Sans, a variable font from GitHub
+cask "font-mona-sans"
+# Reverse proxy, secure introspectable tunnels to localhost
+cask "ngrok"
 # Command-line shell and scripting language
 cask "powershell"
-# Open-source code editor
-cask "visual-studio-code"
-# Rust-based terminal
-cask "warp"
