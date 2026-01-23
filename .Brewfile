@@ -31,6 +31,7 @@ cask "beyond-compare"
 cask "brave-browser"
 cask "chatgpt"
 cask "cleanmymac"
+cask 'codex'
 cask "copilot-cli"
 cask "discord"
 cask "docker-desktop"
