@@ -1,7 +1,6 @@
-# Add alias to easily start a ROSETTA2 terminal (x86_64 terminal on Apple Silicon)
-alias rosetta="arch -x86_64 zsh"
+# Aliases — Architecture helpers
+alias rosetta="arch -x86_64 zsh"        # Launch a Rosetta (x86_64) subshell
 
-# Add alias for COMMANDS to override default commands
-alias ls="exa --icons --group-directories-first"
-alias ll="exa --icons --group-directories-first -l"
-alias grep='grep --color'
+# Aliases — Core utilities
+alias ll="ls -al"                       # Long listing with hidden files
+alias grep="grep --color=auto"          # Colorized grep when supported

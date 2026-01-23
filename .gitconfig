@@ -1,60 +1,209 @@
+# =============================================================================
+# Git Configuration File
+# Author: Andre Essing
+# Last Updated: 2026-01-23
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# CORE SETTINGS
+# Basic Git behavior configuration
+# -----------------------------------------------------------------------------
 [core]
-    autocrlf = false 
+    # Disable automatic line ending conversion (recommended for cross-platform projects)
+    # Set to 'true' on Windows or 'input' on macOS/Linux if needed
+    autocrlf = false
+
+    # Use VS Code as the default editor for commit messages, rebases, etc.
     editor = code --wait
 
-[filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
+    # Improve performance for large repositories
+    preloadindex = true
+    fscache = true
 
-[user]
-    name = Andre Essing
-    email = 21235652+aessing@users.noreply.github.com
-    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHIP1nIC2BEcxQ9u8ONRnyP3Spg2hn2YvQC9xpPVVCO
+# -----------------------------------------------------------------------------
+# INIT SETTINGS
+# Default settings for new repositories
+# -----------------------------------------------------------------------------
+[init]
+    # Use 'main' as the default branch name (modern standard)
+    defaultBranch = main
 
+# -----------------------------------------------------------------------------
+# PULL/PUSH SETTINGS
+# Configure default behavior for pull and push operations
+# -----------------------------------------------------------------------------
+[pull]
+    # Rebase local commits on top of fetched commits (cleaner history)
+    # Change to 'false' if you prefer merge commits
+    rebase = true
+
+[push]
+    # Only push the current branch to its upstream (safer than 'matching')
+    default = current
+
+    # Automatically set up tracking for new branches
+    autoSetupRemote = true
+
+# -----------------------------------------------------------------------------
+# FETCH SETTINGS
+# Configure fetch behavior
+# -----------------------------------------------------------------------------
+[fetch]
+    # Automatically prune deleted remote branches on fetch
+    prune = true
+
+    # Also prune deleted tags
+    pruneTags = true
+
+# -----------------------------------------------------------------------------
+# BRANCH SETTINGS
+# Branch management configuration
+# -----------------------------------------------------------------------------
+[branch]
+    # Sort branches by most recent commit (most active first)
+    sort = -committerdate
+
+# -----------------------------------------------------------------------------
+# ALIASES
+# Shorthand commands for common Git operations
+# Usage: git <alias> (e.g., 'git st' instead of 'git status')
+# -----------------------------------------------------------------------------
 [alias]
-    br = branch                                         # Shorten branch command
-    changes = diff --name-status -r                     # Show all changed files
-    ci = commit                                         # Shorten the commit command
-    cm = commit -m                                      # Shorten the commit command
-    co = checkout                                       # Shorten the checkout command
-    d = diff                                            # Displays differences between files in different commits or between a commit and the working tree
-    dc = diff --cached                                  # Displays differences between files in different commits or between a commit and the working tree
-    diffstat = diff --stat -r                           # Displays a summary of the changes in a commit
-    dv = difftool -t vimdiff -y                         # Display diffs using vimdiff
-    gl = config --global -l                             # Makes it easier to list all user configurations
-    hist = log --oneline --graph --decorate --all       # Show a history of commits
-    last = log -1 HEAD --stat                           # Shows details about the most recent commit you made
-    lc = log ORIG_HEAD.. --stat --no-merges             # A shortcut for seeing the fetched commits
-    lg = log -p                                         # Shows the commit logs with the diffstat
-    lp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    ll = log --oneline                                  # Display your commits as single lines for more compact output
-    llog = log --date=local                             # Shortcut for displaying dates in your local timezone
-    pl = pull                                           # Shorten the pull command
-    ps = push                                           # Shorten the push command
-    rv = remote -v                                      # Lists all configured remote repositories
-    sb = status -sb                                     # Output a less verbose status with branch information
+    # === Basic Commands ===
+    br = branch                                         # List/create/delete branches
+    ci = commit                                         # Create a commit
+    cm = commit -m                                      # Commit with inline message
+    co = checkout                                       # Switch branches or restore files
+    f = fetch                                           # Download objects from remote
+    fp = fetch --prune                                  # Fetch and remove deleted remote branches
+    fap = fetch --all --prune                           # Fetch all remotes and prune
+    pl = pull                                           # Fetch and integrate changes
+    plnr = pull --no-rebase                             # Pull without rebasing
+    ps = push                                           # Upload local commits to remote
+    st = status                                         # Show working tree status
+    sb = status -sb                                     # Short status with branch info
+
+    # === Diff Commands ===
+    d = diff                                            # Show unstaged changes
+    dc = diff --cached                                  # Show staged changes (ready to commit)
+    changes = diff --name-status -r                     # List changed files with status
+    diffstat = diff --stat -r                           # Summary of changes (insertions/deletions)
+    dv = difftool -t vimdiff -y                         # Visual diff using vimdiff
+
+    # === Log Commands ===
+    hist = log --oneline --graph --decorate --all       # Visual commit history graph
+    last = log -1 HEAD --stat                           # Details of the most recent commit
+    lc = log ORIG_HEAD.. --stat --no-merges             # Show commits since last pull/merge
+    lg = log -p                                         # Log with full diff output
+    ll = log --oneline                                  # Compact one-line commit list
+    llog = log --date=local                             # Log with local timezone dates
     slog = log --graph --all --topo-order --pretty='format:%h %ai %s%d (%an)'
-    st = status                                         # Shorten the status command
-    undo = reset --soft HEAD^                           # Undo the last commit
-    unstage = reset HEAD --                             # Unstage a file
-    who = shortlog -s --                                # Shows a list of contributors 
 
-[init] 
-    defaultBranch = main 
+    # Pretty log with colors, graph, and relative dates
+    lp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
+    # === Utility Commands ===
+    gl = config --global -l                             # List global Git configuration
+    rv = remote -v                                      # List remote repositories with URLs
+    who = shortlog -s --                                # List contributors by commit count
+    undo = reset --soft HEAD^                           # Undo last commit (keep changes staged)
+    unstage = reset HEAD --                             # Unstage files (opposite of git add)
+
+    # === Maintenance Commands ===
+    # Clean up local branches that have been deleted on remote
+    # WARNING: This will delete local branches - review before running!
+    cleanup = "!git fetch --prune && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -d"
+
+    # Sync all remotes: fetch, prune, and show status
+    sync = "!git fetch --all --prune && git status -sb"
+
+# -----------------------------------------------------------------------------
+# MERGE SETTINGS
+# Configure merge tool and behavior
+# -----------------------------------------------------------------------------
 [merge]
     tool = vscode
+    # Show original (base) version in conflicts for 3-way merge
+    conflictstyle = diff3
 
 [mergetool "vscode"]
     cmd = "code --wait $MERGED"
 
+[diff]
+    # Use VS Code as the diff tool
+    tool = vscode
+    # Better diff algorithm for more readable output
+    algorithm = histogram
+
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+
+# -----------------------------------------------------------------------------
+# GIT LFS (Large File Storage)
+# Manages large binary files outside the main repository
+# -----------------------------------------------------------------------------
+[filter "lfs"]
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+
+# -----------------------------------------------------------------------------
+# USER IDENTITY
+# Your name and email for commit attribution
+# SECURITY: Using GitHub's noreply email to protect your real email address
+# -----------------------------------------------------------------------------
+[user]
+    name = Andre Essing
+    # GitHub noreply email - keeps your real email private
+    email = 21235652+aessing@users.noreply.github.com
+    # SSH signing key (managed by 1Password)
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHIP1nIC2BEcxQ9u8ONRnyP3Spg2hn2YvQC9xpPVVCO
+
+# -----------------------------------------------------------------------------
+# GPG/SSH SIGNING
+# Cryptographically sign commits to verify authenticity
+# SECURITY: All commits are signed using SSH key via 1Password
+# -----------------------------------------------------------------------------
 [gpg]
-  format = ssh
+    # Use SSH keys for signing (instead of GPG)
+    format = ssh
 
 [gpg "ssh"]
-  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+    # 1Password handles SSH key signing
+    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 
 [commit]
-  gpgsign = true
+    # SECURITY: Always sign commits (proves commit authenticity)
+    gpgsign = true
+
+[tag]
+    # SECURITY: Also sign tags
+    gpgsign = true
+
+# -----------------------------------------------------------------------------
+# CREDENTIAL MANAGEMENT
+# Secure storage of authentication credentials
+# -----------------------------------------------------------------------------
+[credential]
+    # Git Credential Manager for secure credential storage
+    # Using bare command name - Git will find it in PATH (works with any Homebrew prefix)
+    helper = git-credential-manager
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager
+
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+    # Azure DevOps requires the full URL path for authentication
+
+# -----------------------------------------------------------------------------
+# SAFETY SETTINGS
+# Prevent accidental data loss
+# -----------------------------------------------------------------------------
+[transfer]
+    # Verify data integrity during transfers
+    fsckobjects = true
+
+[receive]
+    # Verify data integrity when receiving
+    fsckObjects = true

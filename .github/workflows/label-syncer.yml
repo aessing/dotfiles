@@ -1,3 +1,4 @@
+---
 name: Label Syncer
 on:
   workflow_dispatch:
@@ -5,23 +6,28 @@ on:
     branches:
       - main
     paths:
-      - .github/labels.yml
+      - .github/label-syncer/label-syncer.yml
 
 jobs:
   build:
     name: Sync repository labels from file
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
     steps:
-      - name: Checkout code
-        id: checkout
-        uses: actions/checkout@v2
-        
-      - uses: micnncim/action-label-syncer@v1.2.0
+      - name: Checkout Code
+        id: checkout-code
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8  # v6.0.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync repository labels from file
         id: labeling
+        uses: micnncim/action-label-syncer@3abd5ab72fda571e69fffd97bd4e0033dd5f495c  # v1.3.0 commit SHA
         if: success()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
         with:
-          manifest: .github/labels.yml
+          manifest: .github/label-syncer/label-syncer.yml

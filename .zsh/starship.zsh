@@ -1,44 +1,54 @@
-# Find out which distribution we are running on
-LFILE="/etc/*-release"
-MFILE="/System/Library/CoreServices/SystemVersion.plist"
-if [[ -f $LFILE ]]; then
-  _distro=$(awk '/^ID=/' /etc/*-release | awk -F'=' '{ print tolower($2) }')
-elif [[ -f $MFILE ]]; then
-  _distro="macos"
-fi
+# Starship prompt configuration
+export STARSHIP_CONFIG="$HOME/.config/starship.toml"
 
-# Set an icon based on the distro
-# Make sure your font is compatible with https://github.com/lukas-w/font-logos
-case $_distro in
-    *kali*)                  ICON="ﴣ";;
-    *arch*)                  ICON="";;
-    *debian*)                ICON="";;
-    *raspbian*)              ICON="";;
-    *ubuntu*)                ICON="";;
-    *elementary*)            ICON="";;
-    *fedora*)                ICON="";;
-    *coreos*)                ICON="";;
-    *gentoo*)                ICON="";;
-    *mageia*)                ICON="";;
-    *centos*)                ICON="";;
-    *opensuse*|*tumbleweed*) ICON="";;
-    *sabayon*)               ICON="";;
-    *slackware*)             ICON="";;
-    *linuxmint*)             ICON="";;
-    *alpine*)                ICON="";;
-    *aosc*)                  ICON="";;
-    *nixos*)                 ICON="";;
-    *devuan*)                ICON="";;
-    *manjaro*)               ICON="";;
-    *rhel*)                  ICON="";;
-    *almalinux*)             ICON="";;
-    *rockylinux*)            ICON="";;
-    *macos*)                 ICON="";;
-    *)                       ICON="";;
-esac
+# Detect distro to pick an icon (requires a font with font-logos glyphs)
+_starship_detect_distro() {
+  local distro=""
 
-export STARSHIP_DISTRO="$ICON"
+  if [[ -f /etc/os-release ]]; then
+    distro=$(awk -F= '/^ID=/{print tolower($2)}' /etc/os-release)
+  elif [[ -f /etc/lsb-release ]]; then
+    distro=$(awk -F= '/^DISTRIB_ID=/{print tolower($2)}' /etc/lsb-release)
+  elif [[ -f /System/Library/CoreServices/SystemVersion.plist ]]; then
+    distro="macos"
+  fi
 
+  case ${distro:-} in
+    *kali*)                  echo "";;
+    *arch*)                  echo "";;
+    *debian*)                echo "";;
+    *raspbian*)              echo "";;
+    *ubuntu*)                echo "";;
+    *elementary*)            echo "";;
+    *fedora*)                echo "";;
+    *coreos*)                echo "";;
+    *gentoo*)                echo "";;
+    *mageia*)                echo "";;
+    *centos*)                echo "";;
+    *opensuse*|*tumbleweed*) echo "";;
+    *sabayon*)               echo "";;
+    *slackware*)             echo "";;
+    *linuxmint*)             echo "";;
+    *alpine*)                echo "";;
+    *aosc*)                  echo "";;
+    *nixos*)                 echo "";;
+    *devuan*)                echo "";;
+    *manjaro*)               echo "";;
+    *rhel*)                  echo "";;
+    *almalinux*)             echo "";;
+    *rockylinux*)            echo "";;
+    *macos*)                 echo "";;
+    *)                       echo "";;
+  esac
+}
+
+export STARSHIP_DISTRO="$(_starship_detect_distro)"
+unset -f _starship_detect_distro
+
+# Disable Warp-specific tweaks when not in a local Warp shell session
 if [[ -z ${WARP_IS_LOCAL_SHELL_SESSION} ]]; then
   export STARSHIP_NOWARP=1
 fi
+
+# Load Starship
+eval "$(starship init zsh)"

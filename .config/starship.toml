@@ -1,4 +1,4 @@
-﻿# ~/.config/starship.toml
+# ~/.config/starship.toml
 
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
@@ -22,6 +22,7 @@ format = """
 ($nodejs)\
 ($package)\
 ($azure)\
+($kubernetes)\
 ($battery)\
 ($cmd_duration)\
 \n\
@@ -31,54 +32,64 @@ format = """
 [env_var.STARSHIP_DISTRO]
 disabled = false
 format = '[$env_value]($style) '
-style = 'bold white'
+style = 'bold 255'
 variable = "STARSHIP_DISTRO"
 
 [username]
 disabled = false
 format = "[$user]($style) "
 show_always = true
-style_user = "bold white"
-style_root = "bold red"
+style_user = "bold 220"
+style_root = "bold 196"
 
 [hostname]
 disabled = false
 format = "on [$hostname]($style) "
 ssh_only = false
-style = "bold yellow"
+style = "bold 226"
 trim_at = "."
+
+[shell]
+disabled = false
+bash_indicator = ""
+zsh_indicator = ""
+powershell_indicator = "" 
+cmd_indicator = ""
+unknown_indicator = ""
+format = "using [$indicator]($style) " 
+style = "bold 255"
 
 [directory]
 disabled = false
 format = "at [$path]($style)[$read_only]($read_only_style) "
-home_symbol = " ~"
+home_symbol = "~"
 read_only = " "
-read_only_style = "bold cyan"
-style = "bold 004"
+read_only_style = "bold 028"
+style = "bold 040"
 truncation_length = 1
 truncation_symbol = "…/"
 
 [git_branch]
 disabled = false
-symbol = " "
+symbol = " "
 format = "via [$symbol$branch(:$remote_branch)]($style) "
 #truncation_length = 24
 truncation_symbol = "…/"
-style = "bold green"
+style = "bold 050"
 
 [git_status]
 disabled = false
 format = '[\($all_status$ahead_behind\)]($style) '
-style = "bold green"
+style = "bold 050"
 ahead = "⇡${count}"
 behind = "⇣${count}"
 deleted = " "
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
-conflicted = "🏳"
+conflicted = ""
 modified = " "
-renamed = "襁 "
-staged = '[++\($count\)](green)'
-stashed = " "
+renamed = " "
+staged = '[++\($count\)](050)'
+stashed = " "
 untracked = " "
 up_to_date = ""
 
@@ -86,16 +97,16 @@ up_to_date = ""
 disabled = false
 format = "with [$symbol($version)]($style) and [TFM ($tfm)]($style) "
 heuristic = true
-style = "bold 021"
-symbol = ".NET "
+style = "bold 033"
+symbol = " "
 version_format = "v${raw}"
 
 [nodejs]
 disabled = false
 format = "with [$symbol($version)]($style) "
-not_capable_style	= "bold red"
+not_capable_style	= "bold 088"
 style = "bold 034"
-symbol = " "
+symbol = " "
 version_format = "v${raw}"
 
 [package]
@@ -103,31 +114,31 @@ disabled = false
 display_private = false
 format = "with [$symbol$version]($style) "
 style = "bold 208"
-symbol = "PKG "
+symbol = "󰏖 "
 version_format = "v${raw}"
 
 [azure]
 disabled = false
 format = "via [$symbol($subscription)]($style) "
-symbol = "ﴃ "
-style = "blue bold"
+symbol = " "
+style = "bold 039"
 
 [docker_context]
 disabled = false
 format = "via [$symbol$context](style) "
-style = "bold blue"
-symbol = " "
+style = "bold 033"
+symbol = "󰡨 "
 
 [kubernetes]
 disabled = false
 format = 'via [$symbol$context\($namespace\)]($style) '
-style = 'bold purple'
-symbol = 'ﴱ  '
+style = "bold 027"
+symbol = "󱃾 "
 
 [helm]
 disabled = false
 format = "via [$symbol$version]($style) "
-style = "bold purple"
+style = "bold 129"
 symbol = "  "
 version_format = "v${raw}"
 
@@ -139,31 +150,21 @@ format = "[⏲ $duration](bold 171) "
 [battery]
 disabled = false
 format = "[$symbol$percentage]($style) "
-charging_symbol = " "
-discharging_symbol = " "
-empty_symbol = " "
-full_symbol = " "
-unknown_symbol = " "
+charging_symbol = "󰂄 "
+discharging_symbol = "󱟞 "
+empty_symbol = "󰁺 "
+full_symbol = "󰁹 "
+unknown_symbol = "󰂑 "
 
 [[battery.display]]
-style = "bold red"
+style = "bold 001"
 threshold = 10
 
 [[battery.display]]
-style = "bold yellow"
+style = "bold 011"
 threshold = 30
-
-[shell]
-disabled = false
-bash_indicator = ""
-zsh_indicator = ""
-powershell_indicator = "" 
-cmd_indicator = ""
-unknown_indicator = ""
-format = "using [$indicator]($style) " 
-style = "bold 010"
 
 [character]
 disabled = false
-error_symbol = "[✕](boldm 196)"
-success_symbol = "[➜](bold green)"
+error_symbol = "[✕](bold 196)"
+success_symbol = "[➜](bold 046)"
