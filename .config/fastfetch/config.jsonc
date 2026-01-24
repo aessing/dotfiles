@@ -103,8 +103,6 @@
     {
       "type": "locale",
       "key": "Locale"
-    },
-    "break",
-    "colors"
+    }
   ]
 }

@@ -32,8 +32,8 @@
   },
 
   // Run install script after container is created
-  // Also installs uv and specify-cli for spec-driven development
-  "postCreateCommand": "curl -LsSf https://astral.sh/uv/install.sh | sh && export PATH=\"$HOME/.local/bin:$PATH\" && uv tool install specify-cli --from git+https://github.com/github/spec-kit.git && bash ${containerWorkspaceFolder}/install.sh",
+  // Also installs uv, specify-cli, and fastfetch
+  "postCreateCommand": "curl -LsSf https://astral.sh/uv/install.sh | sh && export PATH=\"$HOME/.local/bin:$PATH\" && uv tool install specify-cli --from git+https://github.com/github/spec-kit.git && sudo apt-get update && sudo apt-get install -y fastfetch && bash ${containerWorkspaceFolder}/install.sh",
 
   // Set default shell to zsh
   "customizations": {
