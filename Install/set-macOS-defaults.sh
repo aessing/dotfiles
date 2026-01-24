@@ -1,13 +1,21 @@
 #!/usr/bin/env bash
-
-# Sets reasonable macOS defaults.
+# =============================================================================
+# macOS System Defaults Configuration
+# =============================================================================
+# Sets reasonable macOS defaults for a better user experience.
+# Run this script once after a fresh macOS installation.
 #
-# Or, in other words, set shit how I like in macOS.
+# Usage: ./set-macOS-defaults.sh
 #
-# The original idea (and a couple settings) were grabbed from:
+# Original idea and some settings from:
 #   https://github.com/mathiasbynens/dotfiles/blob/master/.macos
 #
-# Run ./set-defaults.sh and you'll be good to go.
+# Note: Some changes may require a logout/restart to take effect.
+# =============================================================================
 
-# Show the ~/Library folder.
+# -----------------------------------------------------------------------------
+# Finder
+# -----------------------------------------------------------------------------
+
+# Show the ~/Library folder (hidden by default)
 chflags nohidden ~/Library

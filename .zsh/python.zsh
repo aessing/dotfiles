@@ -1,4 +1,12 @@
-# Homebrew Python: prefer brewed shims if brew is available
-if command -v brew >/dev/null 2>&1; then
-  export PATH="$(brew --prefix python)/libexec/bin:$PATH"
+# =============================================================================
+# Python Configuration
+# =============================================================================
+# Configures Homebrew-installed Python to be preferred over system Python.
+#
+# Installation: brew install python
+# =============================================================================
+
+# Homebrew Python: prefer brewed shims if Homebrew is available
+if [[ -n "$HOMEBREW_PREFIX" && -d "$HOMEBREW_PREFIX/opt/python/libexec/bin" ]]; then
+  export PATH="$HOMEBREW_PREFIX/opt/python/libexec/bin:$PATH"
 fi

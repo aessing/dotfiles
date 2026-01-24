@@ -16,6 +16,14 @@ export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=10000
 export SAVEHIST=10000
 
+# Homebrew prefix (dynamically detected, works for any architecture)
+# We need to find brew first, then use its --prefix
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  export HOMEBREW_PREFIX="/opt/homebrew"
+elif [[ -x /usr/local/bin/brew ]]; then
+  export HOMEBREW_PREFIX="/usr/local"
+fi
+
 # Path variable
 export PATH=/usr/local/bin:/usr/local/sbin:"$PATH"
 

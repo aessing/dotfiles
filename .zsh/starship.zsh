@@ -1,3 +1,13 @@
+# =============================================================================
+# Starship Prompt Configuration
+# =============================================================================
+# Configures and initializes the Starship cross-shell prompt.
+# Includes automatic distro icon detection for the prompt.
+#
+# Installation: brew install starship
+# Config file:  ~/.config/starship.toml
+# =============================================================================
+
 # Starship prompt configuration
 export STARSHIP_CONFIG="$HOME/.config/starship.toml"
 

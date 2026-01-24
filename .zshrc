@@ -16,8 +16,11 @@
 [[ -f ~/.zsh/nvm.zsh ]] && source ~/.zsh/nvm.zsh
 [[ -f ~/.zsh/python.zsh ]] && source ~/.zsh/python.zsh
 
+# Autocomplete and suggestions
+[[ -f ~/.zsh/autocomplete.sh ]] && source ~/.zsh/autocomplete.sh
+
 # Monokai theme for Zsh (load before prompt)
-[[ -f ~/.zsh/monokai.app ]] && source ~/.zsh/monokai.app
+[[ -f ~/.zsh/monokai-style.zsh ]] && source ~/.zsh/monokai.app
 [[ -f ~/.zsh/monokai.zsh ]] && source ~/.zsh/monokai.zsh
 
 # Terminal prompt configuration (Starship)

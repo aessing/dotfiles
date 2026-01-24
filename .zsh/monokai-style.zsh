@@ -1,3 +1,12 @@
+# =============================================================================
+# Zsh Syntax Highlighting (Monokai Theme)
+# =============================================================================
+# Loads zsh-syntax-highlighting with custom Monokai-inspired styling.
+# Provides real-time syntax highlighting as you type commands.
+#
+# Installation: brew install zsh-syntax-highlighting
+# =============================================================================
+
 # Monokai theme — colors, keybindings, and completion
 # Prompt handled by Starship
 

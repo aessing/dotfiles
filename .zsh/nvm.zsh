@@ -1,9 +1,19 @@
-# NVM (Homebrew install)
+# =============================================================================
+# NVM (Node Version Manager) Configuration
+# =============================================================================
+# Loads NVM installed via Homebrew for managing Node.js versions.
+#
+# Installation: brew install nvm
+# =============================================================================
+
 export NVM_DIR="$HOME/.nvm"
-if [[ -s "/opt/homebrew/opt/nvm/nvm.sh" ]]; then
-	. "/opt/homebrew/opt/nvm/nvm.sh"                      # Load nvm
+
+# Load NVM if installed via Homebrew
+if [[ -n "$HOMEBREW_PREFIX" && -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ]]; then
+  source "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
 fi
 
-if [[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ]]; then
-	. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"   # Load nvm completion
+# Load NVM bash completion
+if [[ -n "$HOMEBREW_PREFIX" && -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ]]; then
+  source "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
 fi
