@@ -152,8 +152,12 @@ Apply macOS system preferences:
 
 This repository includes a `.devcontainer/devcontainer.json` for automatic setup in GitHub Codespaces:
 
-- Zsh as default shell
-- Starship prompt pre-installed
+- **Zsh** as default shell
+- **Starship** prompt pre-installed
+- **Zsh plugins:** zsh-autosuggestions & zsh-syntax-highlighting
+- **GitHub CLI** (`gh`) pre-installed
+- **uv** (fast Python package manager) installed
+- **specify-cli** (spec-driven development) installed
 - Dotfiles automatically symlinked
 
 ---
@@ -184,7 +188,7 @@ brew install --cask font-jetbrains-mono-nerd-font
 
 ## :file_folder: Repository Structure
 
-```
+```text
 ~/.dotfiles/
 ├── .Brewfile                    # Homebrew packages (personal)
 ├── .Brewfile.DBX                # Homebrew packages (work)
@@ -198,15 +202,31 @@ brew install --cask font-jetbrains-mono-nerd-font
 │   ├── config
 │   └── 1Password/config
 ├── .zsh/                        # Modular Zsh configs
+│   ├── aliases.zsh
+│   ├── autocomplete.sh
+│   ├── azure_functions.zsh
+│   ├── docker.zsh
+│   ├── dotnet.zsh
+│   ├── functions.zsh
+│   ├── homebrew.zsh
+│   ├── monokai.zsh
+│   ├── nvm.zsh
+│   ├── python.zsh
+│   └── starship.zsh
 ├── .zshenv
 ├── .zprofile
 ├── .zshrc
 ├── Config/
-│   └── set-macOS-defaults.sh
+│   └── set-macOS-defaults.sh    # macOS system preferences
 ├── Fonts/
+│   ├── CaskaydiaCoveNerdFont/
+│   ├── CaskaydiaMonoNerdFont/
+│   └── JetBrainsMonoNerdFont/
 ├── Themes/
+│   └── monokai-pro-terminal/    # Terminal.app themes
 ├── install.sh                   # Cross-platform symlink script
-└── setup_macos.sh               # macOS bootstrap script
+├── setup_macos.sh               # macOS bootstrap script
+└── README.md
 ```
 
 ---
