@@ -1,26 +1,93 @@
 # Andre's Dotfiles
 
-This repository contains my personal configuration files, customizations, themes, and fonts to personalize my macOS experience.
+This repository contains my personal configuration files, customizations, themes, and fonts to personalize my macOS and Linux experience. It works on **macOS**, **Linux**, and **GitHub Codespaces**.
+
+---
+
+## :rocket: Quick Start
+
+### Fresh macOS Installation
+
+Run this single command to set up everything automatically:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/aessing/dotfiles/main/setup_macos.sh)"
+```
+
+This will:
+1. Install **Homebrew**
+2. Install **Git** via Homebrew
+3. Clone this repository to `~/.dotfiles`
+4. Install packages from a **Brewfile** (your choice)
+5. Apply **macOS system preferences**
+6. **Symlink** all dotfiles to your home directory
+
+### Existing Installation / Linux / Codespaces
+
+```bash
+git clone https://github.com/aessing/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+./install.sh
+```
 
 ---
 
 ## :open_file_folder: What's Included
 
+### :gear: Shell Configuration
+
+| File | Description |
+|------|-------------|
+| `.zshrc` | Main Zsh configuration file |
+| `.zshenv` | Environment variables (loaded for all shells) |
+| `.zprofile` | Login shell configuration |
+| `.zsh/` | Modular Zsh configuration scripts |
+
+#### Zsh Modules (`.zsh/`)
+
+| Module | Description |
+|--------|-------------|
+| `aliases.zsh` | Shell aliases and shortcuts |
+| `autocomplete.sh` | Zsh autosuggestions configuration |
+| `azure_functions.zsh` | Azure Functions CLI settings |
+| `docker.zsh` | Docker CLI completions |
+| `dotnet.zsh` | .NET SDK configuration |
+| `functions.zsh` | Custom shell functions |
+| `homebrew.zsh` | Homebrew environment setup |
+| `monokai.zsh` | Zsh syntax highlighting (Monokai theme) |
+| `nvm.zsh` | Node Version Manager configuration |
+| `python.zsh` | Python/Homebrew Python setup |
+| `starship.zsh` | Starship prompt with distro detection |
+
+### :package: Package Management
+
+| File | Description |
+|------|-------------|
+| `.Brewfile` | Personal Homebrew packages (full setup) |
+| `.Brewfile.DBX` | Databricks Homebrew packages |
+
+### :wrench: Configuration Files
+
+| File | Description |
+|------|-------------|
+| `.gitconfig` | Git configuration with aliases and settings |
+| `.config/starship.toml` | Starship prompt configuration |
+| `.config/1Password/ssh/agent.toml` | 1Password SSH agent settings |
+| `.ssh/config` | SSH client configuration |
+
 ### :abc: Fonts
 
-To display icons in terminal and applications, I'm using [Nerd Fonts](https://www.nerdfonts.com) – iconic font aggregator, collection, and patcher. The following fonts are included:
+Using [Nerd Fonts](https://www.nerdfonts.com) for icons in terminal and applications:
 
 | Font | Description |
 |------|-------------|
-| **CaskaydiaCove Nerd Font** | A patched version of Cascadia Code with Nerd Font icons – perfect for applications |
-| **CaskaydiaMono Nerd Font** | Monospace variant of CaskaydiaCove – ideal for terminal use |
-| **JetBrains Mono Nerd Font** | A typeface for developers with Nerd Font icons |
+| **CaskaydiaCove Nerd Font** | Patched Cascadia Code with Nerd Font icons |
+| **CaskaydiaMono Nerd Font** | Monospace variant – ideal for terminal |
+| **JetBrains Mono Nerd Font** | Developer typeface with Nerd Font icons |
 
-> **Note:** I'm currently using **JetBrains Mono Nerd Font** in terminal applications and **JetBrains Mono Nerd Font** in other applications (VSCode).
+> **Currently using:** JetBrains Mono Nerd Font
 
 ### :art: Themes
-
-Terminal themes to enhance the visual experience:
 
 #### Monokai Pro Terminal Themes
 
@@ -35,48 +102,118 @@ Beautiful Monokai Pro themes for macOS Terminal.app:
 - Monokai Pro Light
 - Monokai Pro Light (Filter Sun)
 
-> **Note:** I'm currently using **Monokai Pro (Filter Spectrum)** in terminal application.
-> You can find more information about Monokai Pro [here](https://monokai.pro/).
+> **Currently using:** Monokai Pro (Filter Spectrum)  
+> More info: [monokai.pro](https://monokai.pro/)
 
 ---
 
-## :rocket: Installation
+## :computer: Scripts
 
-### Fonts
+### `setup_macos.sh`
 
-#### Via Homebrew (recommended)
+Full macOS bootstrap script with interactive prompts:
 
 ```bash
-# Tap the fonts cask
-brew tap homebrew/cask-fonts
+./setup_macos.sh
+```
 
-# Install CaskaydiaCove Nerd Font
+**Steps:**
+1. Install Homebrew
+2. Install Git
+3. Clone dotfiles repository
+4. Install packages from Brewfile (selectable)
+5. Apply macOS system preferences
+6. Symlink dotfiles
+
+### `install.sh`
+
+Cross-platform dotfiles symlink script:
+
+```bash
+./install.sh [--force]
+```
+
+**Options:**
+- `--force` — Overwrite existing files without creating backups
+
+**Platforms:** macOS, Linux, GitHub Codespaces
+
+### `Config/set-macOS-defaults.sh`
+
+Apply macOS system preferences:
+
+```bash
+./Config/set-macOS-defaults.sh
+```
+
+---
+
+## :cloud: GitHub Codespaces
+
+This repository includes a `.devcontainer/devcontainer.json` for automatic setup in GitHub Codespaces:
+
+- Zsh as default shell
+- Starship prompt pre-installed
+- Dotfiles automatically symlinked
+
+---
+
+## :floppy_disk: Manual Installation
+
+### Fonts via Homebrew
+
+```bash
 brew install --cask font-caskaydia-cove-nerd-font
-
-# Install CaskaydiaMono Nerd Font
 brew install --cask font-caskaydia-mono-nerd-font
-
-# Install JetBrains Mono Nerd Font
 brew install --cask font-jetbrains-mono-nerd-font
 ```
 
-#### Manual Installation
+### Fonts Manual
 
-1. Navigate to the `Fonts/` directory
-2. Open the desired font folder
-3. Double-click on the font files to install them via Font Book (macOS) or your system's font manager
+1. Navigate to `Fonts/` directory
+2. Open desired font folder
+3. Double-click font files to install via Font Book (macOS)
 
 ### Terminal Themes (macOS)
 
 1. Navigate to `Themes/monokai-pro-terminal/`
-2. Double-click on the `.terminal` file to import it into Terminal.app
-3. Go to Terminal → Preferences → Profiles and set your preferred theme as default
+2. Double-click `.terminal` file to import
+3. Set as default in Terminal → Preferences → Profiles
+
+---
+
+## :file_folder: Repository Structure
+
+```
+~/.dotfiles/
+├── .Brewfile                    # Homebrew packages (personal)
+├── .Brewfile.DBX                # Homebrew packages (work)
+├── .config/
+│   ├── 1Password/ssh/agent.toml
+│   └── starship.toml
+├── .devcontainer/
+│   └── devcontainer.json        # Codespaces configuration
+├── .gitconfig
+├── .ssh/
+│   ├── config
+│   └── 1Password/config
+├── .zsh/                        # Modular Zsh configs
+├── .zshenv
+├── .zprofile
+├── .zshrc
+├── Config/
+│   └── set-macOS-defaults.sh
+├── Fonts/
+├── Themes/
+├── install.sh                   # Cross-platform symlink script
+└── setup_macos.sh               # macOS bootstrap script
+```
 
 ---
 
 ## :star: Credits
 
-This repository is inspired by the **Dotfiles** repository by [**Christian Lempa**](https://github.com/ChristianLempa/dotfiles). Thanks Christian!
+Inspired by the **Dotfiles** repository by [**Christian Lempa**](https://github.com/ChristianLempa/dotfiles). Thanks Christian!
 
 ---
 

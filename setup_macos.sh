@@ -32,17 +32,56 @@ readonly DOTFILES_DIR="$HOME/.dotfiles"
 # Helper Functions
 # -----------------------------------------------------------------------------
 
+# Colors
+readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
+readonly YELLOW='\033[0;33m'
+readonly BLUE='\033[0;34m'
+readonly MAGENTA='\033[0;35m'
+readonly CYAN='\033[0;36m'
+readonly BOLD='\033[1m'
+readonly DIM='\033[2m'
+readonly RESET='\033[0m'
+
 # Print formatted status messages
 info() {
-  printf "\033[0;34m[INFO]\033[0m %s\n" "$1"
+  printf "${BLUE}  ℹ${RESET}  %s\n" "$1"
 }
 
 success() {
-  printf "\033[0;32m[OK]\033[0m %s\n" "$1"
+  printf "${GREEN}  ✓${RESET}  %s\n" "$1"
 }
 
 error() {
-  printf "\033[0;31m[ERROR]\033[0m %s\n" "$1" >&2
+  printf "${RED}  ✗${RESET}  %s\n" "$1" >&2
+}
+
+warn() {
+  printf "${YELLOW}  ⚠${RESET}  %s\n" "$1"
+}
+
+# Print section header
+section() {
+  local step="$1"
+  local title="$2"
+  echo ""
+  printf "${BOLD}${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}\n"
+  printf "${BOLD}${CYAN}  Step %s: %s${RESET}\n" "$step" "$title"
+  printf "${BOLD}${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}\n"
+  echo ""
+}
+
+# Print banner
+banner() {
+  echo ""
+  printf "${BOLD}${MAGENTA}╔══════════════════════════════════════════════════════════════════════════════╗${RESET}\n"
+  printf "${BOLD}${MAGENTA}║${RESET}                                                                              ${BOLD}${MAGENTA}║${RESET}\n"
+  printf "${BOLD}${MAGENTA}║${RESET}   ${BOLD}🍎  macOS Setup Script${RESET}                                                   ${BOLD}${MAGENTA}║${RESET}\n"
+  printf "${BOLD}${MAGENTA}║${RESET}                                                                              ${BOLD}${MAGENTA}║${RESET}\n"
+  printf "${BOLD}${MAGENTA}║${RESET}   ${DIM}Homebrew • Git • Dotfiles • Packages • Preferences${RESET}                      ${BOLD}${MAGENTA}║${RESET}\n"
+  printf "${BOLD}${MAGENTA}║${RESET}                                                                              ${BOLD}${MAGENTA}║${RESET}\n"
+  printf "${BOLD}${MAGENTA}╚══════════════════════════════════════════════════════════════════════════════╝${RESET}\n"
+  echo ""
 }
 
 # Check if a command exists
@@ -66,12 +105,12 @@ if [[ "$(id -u)" -eq 0 ]]; then
   exit 1
 fi
 
-info "Starting macOS setup..."
+banner
 
 # -----------------------------------------------------------------------------
 # Step 1: Install Homebrew
 # -----------------------------------------------------------------------------
-info "Checking for Homebrew..."
+section "1" "Install Homebrew"
 
 if command_exists brew; then
   success "Homebrew is already installed."
@@ -107,7 +146,7 @@ success "Homebrew is up to date."
 # -----------------------------------------------------------------------------
 # Step 2: Install Git via Homebrew
 # -----------------------------------------------------------------------------
-info "Checking for Git..."
+section "2" "Install Git"
 
 # Check if Git is installed via Homebrew (not just system Git)
 if brew list git &>/dev/null; then
@@ -128,7 +167,7 @@ fi
 # -----------------------------------------------------------------------------
 # Step 3: Clone Dotfiles Repository
 # -----------------------------------------------------------------------------
-info "Checking for dotfiles repository..."
+section "3" "Clone Dotfiles Repository"
 
 if [[ -d "$DOTFILES_DIR" ]]; then
   # Directory exists - check if it's a git repo
@@ -158,7 +197,7 @@ fi
 # -----------------------------------------------------------------------------
 # Step 4: Install Packages from Brewfile
 # -----------------------------------------------------------------------------
-info "Searching for available Brewfiles..."
+section "4" "Install Packages from Brewfile"
 
 # Find all Brewfiles in the dotfiles directory
 brewfiles=()
@@ -168,11 +207,9 @@ done < <(find "$DOTFILES_DIR" -maxdepth 1 -name ".Brewfile*" -type f -print0 | s
 
 # Check if any Brewfiles were found
 if [[ ${#brewfiles[@]} -eq 0 ]]; then
-  error "No Brewfiles found in $DOTFILES_DIR"
+  warn "No Brewfiles found in $DOTFILES_DIR"
   info "Skipping package installation."
 else
-  # Add "Skip" option
-  echo ""
   info "Available Brewfiles:"
   echo ""
   
@@ -181,15 +218,15 @@ else
     filename=$(basename "${brewfiles[$i]}")
     # Count packages in each Brewfile
     pkg_count=$(grep -cE "^(brew|cask|tap) " "${brewfiles[$i]}" 2>/dev/null || echo "0")
-    printf "  %d) %s (%s packages)\n" "$((i + 1))" "$filename" "$pkg_count"
+    printf "     ${BOLD}%d)${RESET}  %-20s ${DIM}(%s packages)${RESET}\n" "$((i + 1))" "$filename" "$pkg_count"
   done
-  printf "  %d) Skip package installation\n" "$((${#brewfiles[@]} + 1))"
+  printf "     ${BOLD}%d)${RESET}  Skip installation\n" "$((${#brewfiles[@]} + 1))"
   echo ""
   
   # Get user selection with input validation
   selected_brewfile=""
   while true; do
-    printf "\033[0;34m[INPUT]\033[0m Select a Brewfile (1-%d): " "$((${#brewfiles[@]} + 1))"
+    printf "  ${CYAN}❯${RESET} Select a Brewfile (1-%d): " "$((${#brewfiles[@]} + 1))"
     read -r selection
     
     # Validate input is a number
@@ -234,17 +271,18 @@ fi
 # -----------------------------------------------------------------------------
 # Step 5: Apply macOS System Preferences
 # -----------------------------------------------------------------------------
+section "5" "Apply macOS System Preferences"
+
 readonly MACOS_DEFAULTS_SCRIPT="$DOTFILES_DIR/Config/set-macOS-defaults.sh"
 
 if [[ -f "$MACOS_DEFAULTS_SCRIPT" ]]; then
+  info "This will configure Finder and other system settings."
   echo ""
-  info "Would you like to apply macOS system preferences?"
-  printf "  This will configure Finder and other system settings.\n"
-  echo ""
-  printf "\033[0;34m[INPUT]\033[0m Apply macOS defaults? (y/N): "
+  printf "  ${CYAN}❯${RESET} Apply macOS defaults? (y/N): "
   read -r apply_defaults
   
   if [[ "$apply_defaults" =~ ^[Yy]$ ]]; then
+    echo ""
     info "Applying macOS system preferences..."
     
     # Ensure script is executable
@@ -253,33 +291,34 @@ if [[ -f "$MACOS_DEFAULTS_SCRIPT" ]]; then
     # Run the defaults script
     if bash "$MACOS_DEFAULTS_SCRIPT"; then
       success "macOS preferences applied successfully."
-      info "Some changes may require a logout or restart to take effect."
+      warn "Some changes may require a logout or restart to take effect."
     else
       error "Failed to apply some macOS preferences."
     fi
   else
     info "Skipping macOS preferences."
-    info "You can run it later: $MACOS_DEFAULTS_SCRIPT"
+    printf "     ${DIM}Run later: %s${RESET}\n" "$MACOS_DEFAULTS_SCRIPT"
   fi
 else
-  error "macOS defaults script not found at $MACOS_DEFAULTS_SCRIPT"
+  warn "macOS defaults script not found at $MACOS_DEFAULTS_SCRIPT"
   info "Skipping macOS preferences."
 fi
 
 # -----------------------------------------------------------------------------
 # Step 6: Symlink Dotfiles
 # -----------------------------------------------------------------------------
+section "6" "Symlink Dotfiles"
+
 readonly INSTALL_SCRIPT="$DOTFILES_DIR/install.sh"
 
 if [[ -f "$INSTALL_SCRIPT" ]]; then
+  info "This will link config files (.zshrc, .gitconfig, etc.) to your home directory."
   echo ""
-  info "Would you like to symlink dotfiles to your home directory?"
-  printf "  This will link config files (.zshrc, .gitconfig, etc.) to ~\n"
-  echo ""
-  printf "\033[0;34m[INPUT]\033[0m Symlink dotfiles? (Y/n): "
+  printf "  ${CYAN}❯${RESET} Symlink dotfiles? (Y/n): "
   read -r symlink_dotfiles
   
   if [[ ! "$symlink_dotfiles" =~ ^[Nn]$ ]]; then
+    echo ""
     info "Running dotfiles installation script..."
     echo ""
     
@@ -291,14 +330,14 @@ if [[ -f "$INSTALL_SCRIPT" ]]; then
       success "Dotfiles symlinked successfully."
     else
       error "Failed to symlink some dotfiles."
-      info "You can re-run: $INSTALL_SCRIPT"
+      printf "     ${DIM}Re-run: %s${RESET}\n" "$INSTALL_SCRIPT"
     fi
   else
     info "Skipping dotfiles symlinks."
-    info "You can run it later: $INSTALL_SCRIPT"
+    printf "     ${DIM}Run later: %s${RESET}\n" "$INSTALL_SCRIPT"
   fi
 else
-  error "Install script not found at $INSTALL_SCRIPT"
+  warn "Install script not found at $INSTALL_SCRIPT"
   info "Skipping dotfiles symlinks."
 fi
 
@@ -306,9 +345,11 @@ fi
 # Setup Complete
 # -----------------------------------------------------------------------------
 echo ""
-success "=============================================="
-success "  macOS setup complete!"
-success "=============================================="
-echo ""
-info "Your system is now configured. Restart your terminal to apply all changes."
+printf "${BOLD}${GREEN}╔══════════════════════════════════════════════════════════════════════════════╗${RESET}\n"
+printf "${BOLD}${GREEN}║${RESET}                                                                              ${BOLD}${GREEN}║${RESET}\n"
+printf "${BOLD}${GREEN}║${RESET}   ${BOLD}✓  macOS setup complete!${RESET}                                                  ${BOLD}${GREEN}║${RESET}\n"
+printf "${BOLD}${GREEN}║${RESET}                                                                              ${BOLD}${GREEN}║${RESET}\n"
+printf "${BOLD}${GREEN}║${RESET}   ${DIM}Restart your terminal to apply all changes.${RESET}                             ${BOLD}${GREEN}║${RESET}\n"
+printf "${BOLD}${GREEN}║${RESET}                                                                              ${BOLD}${GREEN}║${RESET}\n"
+printf "${BOLD}${GREEN}╚══════════════════════════════════════════════════════════════════════════════╝${RESET}\n"
 echo ""

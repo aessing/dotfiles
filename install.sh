@@ -32,20 +32,42 @@ done
 # -----------------------------------------------------------------------------
 # Helper Functions
 # -----------------------------------------------------------------------------
+
+# Colors
+readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
+readonly YELLOW='\033[0;33m'
+readonly BLUE='\033[0;34m'
+readonly MAGENTA='\033[0;35m'
+readonly CYAN='\033[0;36m'
+readonly BOLD='\033[1m'
+readonly DIM='\033[2m'
+readonly RESET='\033[0m'
+
 info() {
-  printf "\033[0;34m[INFO]\033[0m %s\n" "$1"
+  printf "${BLUE}  ℹ${RESET}  %s\n" "$1"
 }
 
 success() {
-  printf "\033[0;32m[OK]\033[0m %s\n" "$1"
+  printf "${GREEN}  ✓${RESET}  %s\n" "$1"
 }
 
 warn() {
-  printf "\033[0;33m[WARN]\033[0m %s\n" "$1"
+  printf "${YELLOW}  ⚠${RESET}  %s\n" "$1"
 }
 
 error() {
-  printf "\033[0;31m[ERROR]\033[0m %s\n" "$1" >&2
+  printf "${RED}  ✗${RESET}  %s\n" "$1" >&2
+}
+
+# Print section header
+section() {
+  local title="$1"
+  echo ""
+  printf "${BOLD}${CYAN}┌──────────────────────────────────────────────────────────────────────────────┐${RESET}\n"
+  printf "${BOLD}${CYAN}│${RESET}  ${BOLD}%s${RESET}\n" "$title"
+  printf "${BOLD}${CYAN}└──────────────────────────────────────────────────────────────────────────────┘${RESET}\n"
+  echo ""
 }
 
 # Create symlink with backup of existing files
@@ -136,21 +158,21 @@ declare -a CODESPACES_LINKS=(
 # Main Installation
 # -----------------------------------------------------------------------------
 echo ""
-info "=============================================="
-info "  Dotfiles Installation"
-info "=============================================="
+printf "${BOLD}${MAGENTA}╔══════════════════════════════════════════════════════════════════════════════╗${RESET}\n"
+printf "${BOLD}${MAGENTA}║${RESET}                                                                              ${BOLD}${MAGENTA}║${RESET}\n"
+printf "${BOLD}${MAGENTA}║${RESET}   ${BOLD}🔗  Dotfiles Installation${RESET}                                                ${BOLD}${MAGENTA}║${RESET}\n"
+printf "${BOLD}${MAGENTA}║${RESET}                                                                              ${BOLD}${MAGENTA}║${RESET}\n"
+printf "${BOLD}${MAGENTA}╚══════════════════════════════════════════════════════════════════════════════╝${RESET}\n"
 echo ""
-info "Dotfiles directory: $DOTFILES_DIR"
-info "Detected OS: $OS"
-[[ -n "${CODESPACES:-}" ]] && info "Running in GitHub Codespaces"
+printf "  ${DIM}Dotfiles:${RESET}  %s\n" "$DOTFILES_DIR"
+printf "  ${DIM}System:${RESET}    %s\n" "$OS"
+[[ -n "${CODESPACES:-}" ]] && printf "  ${DIM}Environment:${RESET} GitHub Codespaces\n"
 [[ "$FORCE_MODE" == true ]] && warn "Force mode enabled - existing files will be overwritten"
-echo ""
 
 # -----------------------------------------------------------------------------
 # Install Common Symlinks
 # -----------------------------------------------------------------------------
-info "Linking common dotfiles..."
-echo ""
+section "Common Dotfiles"
 
 for link in "${COMMON_LINKS[@]}"; do
   src="${DOTFILES_DIR}/${link%%:*}"
@@ -158,14 +180,11 @@ for link in "${COMMON_LINKS[@]}"; do
   link_file "$src" "$dest"
 done
 
-echo ""
-
 # -----------------------------------------------------------------------------
 # Install OS-Specific Symlinks
 # -----------------------------------------------------------------------------
 if [[ "$OS" == "Darwin" ]]; then
-  info "Linking macOS-specific dotfiles..."
-  echo ""
+  section "macOS-Specific Dotfiles"
   
   for link in "${MACOS_LINKS[@]}"; do
     src="${DOTFILES_DIR}/${link%%:*}"
@@ -173,11 +192,8 @@ if [[ "$OS" == "Darwin" ]]; then
     link_file "$src" "$dest"
   done
   
-  echo ""
-  
 elif [[ "$OS" == "Linux" ]]; then
-  info "Linking Linux-specific dotfiles..."
-  echo ""
+  section "Linux-Specific Dotfiles"
   
   for link in "${LINUX_LINKS[@]}"; do
     src="${DOTFILES_DIR}/${link%%:*}"
@@ -187,8 +203,7 @@ elif [[ "$OS" == "Linux" ]]; then
   
   # Codespaces-specific
   if [[ -n "${CODESPACES:-}" ]]; then
-    info "Linking Codespaces-specific dotfiles..."
-    echo ""
+    section "Codespaces-Specific Dotfiles"
     
     for link in "${CODESPACES_LINKS[@]}"; do
       src="${DOTFILES_DIR}/${link%%:*}"
@@ -196,15 +211,12 @@ elif [[ "$OS" == "Linux" ]]; then
       link_file "$src" "$dest"
     done
   fi
-  
-  echo ""
 fi
 
 # -----------------------------------------------------------------------------
 # Post-Installation Tasks
 # -----------------------------------------------------------------------------
-info "Running post-installation tasks..."
-echo ""
+section "Post-Installation Checks"
 
 # Create .config directory if it doesn't exist
 mkdir -p "$XDG_CONFIG_HOME"
@@ -221,14 +233,15 @@ else
   warn "Starship not installed. Install with: brew install starship (macOS) or cargo install starship (Linux)"
 fi
 
-echo ""
-
 # -----------------------------------------------------------------------------
 # Setup Complete
 # -----------------------------------------------------------------------------
-success "=============================================="
-success "  Dotfiles installation complete!"
-success "=============================================="
+echo ""
+printf "${BOLD}${GREEN}╔══════════════════════════════════════════════════════════════════════════════╗${RESET}\n"
+printf "${BOLD}${GREEN}║${RESET}                                                                              ${BOLD}${GREEN}║${RESET}\n"
+printf "${BOLD}${GREEN}║${RESET}   ${BOLD}✓  Dotfiles installation complete!${RESET}                                        ${BOLD}${GREEN}║${RESET}\n"
+printf "${BOLD}${GREEN}║${RESET}                                                                              ${BOLD}${GREEN}║${RESET}\n"
+printf "${BOLD}${GREEN}╚══════════════════════════════════════════════════════════════════════════════╝${RESET}\n"
 echo ""
 
 # Show next steps based on OS
