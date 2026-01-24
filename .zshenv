@@ -15,6 +15,10 @@ export LANG=en_US.UTF-8
 export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=10000
 export SAVEHIST=10000
+setopt HIST_IGNORE_DUPS      # Don't record duplicates
+setopt HIST_IGNORE_SPACE     # Don't record commands starting with space
+setopt SHARE_HISTORY         # Share history between sessions
+setopt APPEND_HISTORY        # Append instead of overwrite
 
 # Homebrew prefix (dynamically detected, works for any architecture)
 # We need to find brew first, then use its --prefix

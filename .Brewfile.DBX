@@ -1,12 +1,21 @@
 tap "azure/functions"
+brew "bat"
 brew "dotnet"
+brew "eza"
+brew "fd"
+brew "fzf"
 brew "gh"
 brew "git"
 brew "git-lfs"
+brew "htop"
+brew "jq"
+brew "mas"
 brew "nvm"
 brew "python@3.14"
 brew "python-tk@3.14"
+brew "ripgrep"
 brew "starship"
+brew "tldr"
 brew "uv"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
@@ -28,3 +37,9 @@ cask "github"
 cask "motu-m-series"
 cask "visual-studio-code"
 cask "whatsapp"
+mas "1Password for Safari", id: 1569813296
+mas "Amphetamine", id: 937984704
+mas "Keka", id: 470158793
+mas "Magnet", id: 441258766
+mas "Perplexity", id: 6714467650
+mas "Speedtest", id: 1153157709

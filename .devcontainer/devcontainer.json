@@ -23,11 +23,17 @@
     // GitHub CLI
     "ghcr.io/devcontainers/features/github-cli:1": {},
     // Starship prompt
-    "ghcr.io/devcontainers-extra/features/starship:1": {}
+    "ghcr.io/devcontainers-extra/features/starship:1": {},
+    // Zsh plugins (autosuggestions & syntax highlighting)
+    "ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {
+      "plugins": "zsh-autosuggestions zsh-syntax-highlighting",
+      "omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions https://github.com/zsh-users/zsh-syntax-highlighting"
+    }
   },
 
   // Run install script after container is created
-  "postCreateCommand": "bash ${containerWorkspaceFolder}/install.sh",
+  // Also installs uv and specify-cli for spec-driven development
+  "postCreateCommand": "curl -LsSf https://astral.sh/uv/install.sh | sh && export PATH=\"$HOME/.local/bin:$PATH\" && uv tool install specify-cli --from git+https://github.com/github/spec-kit.git && bash ${containerWorkspaceFolder}/install.sh",
 
   // Set default shell to zsh
   "customizations": {
@@ -39,14 +45,8 @@
             "path": "/bin/zsh"
           }
         }
-      },
-      "extensions": [
-        // Add recommended VS Code extensions here
-        "github.copilot",
-        "github.copilot-chat",
-        "eamodio.gitlens",
-        "esbenp.prettier-vscode"
-      ]
+      }
+      // Extensions handled by VS Code Settings Sync
     }
   },
 
