@@ -239,7 +239,7 @@ fi
 echo ""
 printf "${BOLD}${GREEN}╔══════════════════════════════════════════════════════════════════════════════╗${RESET}\n"
 printf "${BOLD}${GREEN}║${RESET}                                                                              ${BOLD}${GREEN}║${RESET}\n"
-printf "${BOLD}${GREEN}║${RESET}   ${BOLD}✓  Dotfiles installation complete!${RESET}                                        ${BOLD}${GREEN}║${RESET}\n"
+printf "${BOLD}${GREEN}║${RESET}   ${BOLD}✓  Dotfiles installation complete!${RESET}                                         ${BOLD}${GREEN}║${RESET}\n"
 printf "${BOLD}${GREEN}║${RESET}                                                                              ${BOLD}${GREEN}║${RESET}\n"
 printf "${BOLD}${GREEN}╚══════════════════════════════════════════════════════════════════════════════╝${RESET}\n"
 echo ""
@@ -247,14 +247,12 @@ echo ""
 # Show next steps based on OS
 if [[ "$OS" == "Darwin" ]]; then
   info "Next steps for macOS:"
-  echo "  1. Run ./setup_macos.sh for full macOS setup (Homebrew, packages, preferences)"
-  echo "  2. Restart your terminal or run: source ~/.zshrc"
+  echo "  Restart your terminal or run: source ~/.zshrc"
 elif [[ -n "${CODESPACES:-}" ]]; then
   info "Codespaces setup complete!"
   echo "  Your shell will be configured on next terminal launch."
 else
   info "Next steps for Linux:"
-  echo "  1. Install required packages (starship, zsh-autosuggestions, etc.)"
-  echo "  2. Restart your terminal or run: source ~/.zshrc"
+  echo "  Restart your terminal or run: source ~/.zshrc"
 fi
 echo ""
