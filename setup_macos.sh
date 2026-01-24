@@ -286,7 +286,7 @@ if [[ -f "$MACOS_DEFAULTS_SCRIPT" ]]; then
     info "Applying macOS system preferences..."
     
     # Ensure script is executable
-    chmod +x "$MACOS_DEFAULTS_SCRIPT"
+    #chmod +x "$MACOS_DEFAULTS_SCRIPT"
     
     # Run the defaults script
     if bash "$MACOS_DEFAULTS_SCRIPT"; then
@@ -323,7 +323,7 @@ if [[ -f "$INSTALL_SCRIPT" ]]; then
     echo ""
     
     # Ensure script is executable
-    chmod +x "$INSTALL_SCRIPT"
+    #chmod +x "$INSTALL_SCRIPT"
     
     # Run the install script
     if bash "$INSTALL_SCRIPT"; then
