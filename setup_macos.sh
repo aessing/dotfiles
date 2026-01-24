@@ -7,6 +7,8 @@
 #   2. Installing Git via Homebrew
 #   3. Cloning the dotfiles repository to ~/.dotfiles
 #   4. Installing packages from a Brewfile (user selectable)
+#   5. Applying macOS system preferences
+#   6. Symlinking dotfiles to home directory
 #
 # Usage: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/aessing/dotfiles/main/setup_macos.sh)"
 #
@@ -217,17 +219,87 @@ else
     echo ""
     
     # Run brew bundle with the selected Brewfile
-    # --no-lock: Don't generate a Brewfile.lock.json
     # --file: Specify the Brewfile to use
-    if brew bundle --no-lock --file="$selected_brewfile"; then
+    if brew bundle install --file="$selected_brewfile"; then
       success "All packages installed successfully."
     else
       # brew bundle returns non-zero if some packages failed
       # but may have installed others successfully
       error "Some packages may have failed to install."
-      info "You can re-run 'brew bundle --file=$selected_brewfile' to retry."
+      info "You can re-run 'brew bundle install --file=$selected_brewfile' to retry."
     fi
   fi
+fi
+
+# -----------------------------------------------------------------------------
+# Step 5: Apply macOS System Preferences
+# -----------------------------------------------------------------------------
+readonly MACOS_DEFAULTS_SCRIPT="$DOTFILES_DIR/Config/set-macOS-defaults.sh"
+
+if [[ -f "$MACOS_DEFAULTS_SCRIPT" ]]; then
+  echo ""
+  info "Would you like to apply macOS system preferences?"
+  printf "  This will configure Finder and other system settings.\n"
+  echo ""
+  printf "\033[0;34m[INPUT]\033[0m Apply macOS defaults? (y/N): "
+  read -r apply_defaults
+  
+  if [[ "$apply_defaults" =~ ^[Yy]$ ]]; then
+    info "Applying macOS system preferences..."
+    
+    # Ensure script is executable
+    chmod +x "$MACOS_DEFAULTS_SCRIPT"
+    
+    # Run the defaults script
+    if bash "$MACOS_DEFAULTS_SCRIPT"; then
+      success "macOS preferences applied successfully."
+      info "Some changes may require a logout or restart to take effect."
+    else
+      error "Failed to apply some macOS preferences."
+    fi
+  else
+    info "Skipping macOS preferences."
+    info "You can run it later: $MACOS_DEFAULTS_SCRIPT"
+  fi
+else
+  error "macOS defaults script not found at $MACOS_DEFAULTS_SCRIPT"
+  info "Skipping macOS preferences."
+fi
+
+# -----------------------------------------------------------------------------
+# Step 6: Symlink Dotfiles
+# -----------------------------------------------------------------------------
+readonly INSTALL_SCRIPT="$DOTFILES_DIR/install.sh"
+
+if [[ -f "$INSTALL_SCRIPT" ]]; then
+  echo ""
+  info "Would you like to symlink dotfiles to your home directory?"
+  printf "  This will link config files (.zshrc, .gitconfig, etc.) to ~\n"
+  echo ""
+  printf "\033[0;34m[INPUT]\033[0m Symlink dotfiles? (Y/n): "
+  read -r symlink_dotfiles
+  
+  if [[ ! "$symlink_dotfiles" =~ ^[Nn]$ ]]; then
+    info "Running dotfiles installation script..."
+    echo ""
+    
+    # Ensure script is executable
+    chmod +x "$INSTALL_SCRIPT"
+    
+    # Run the install script
+    if bash "$INSTALL_SCRIPT"; then
+      success "Dotfiles symlinked successfully."
+    else
+      error "Failed to symlink some dotfiles."
+      info "You can re-run: $INSTALL_SCRIPT"
+    fi
+  else
+    info "Skipping dotfiles symlinks."
+    info "You can run it later: $INSTALL_SCRIPT"
+  fi
+else
+  error "Install script not found at $INSTALL_SCRIPT"
+  info "Skipping dotfiles symlinks."
 fi
 
 # -----------------------------------------------------------------------------
@@ -238,8 +310,5 @@ success "=============================================="
 success "  macOS setup complete!"
 success "=============================================="
 echo ""
-info "Next steps:"
-echo "  1. cd $DOTFILES_DIR"
-echo "  2. Run the dotfiles installation/linking script"
-echo "  3. Run ./Install/set-macOS-defaults.sh for system preferences"
+info "Your system is now configured. Restart your terminal to apply all changes."
 echo ""

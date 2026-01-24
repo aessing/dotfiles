@@ -1,0 +1,64 @@
+{
+  // =============================================================================
+  // Dev Container Configuration for GitHub Codespaces
+  // =============================================================================
+  // This configuration sets up a development environment with dotfiles
+  // automatically installed when a Codespace is created.
+  // =============================================================================
+
+  "name": "Dotfiles Development Environment",
+
+  // Use the universal dev container image (includes common tools)
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+
+  // Features to install in the container
+  "features": {
+    // Common utilities (zsh, git, etc.)
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true,
+      "installOhMyZsh": false,
+      "upgradePackages": true
+    },
+    // GitHub CLI
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    // Starship prompt
+    "ghcr.io/devcontainers-extra/features/starship:1": {}
+  },
+
+  // Run install script after container is created
+  "postCreateCommand": "bash ${containerWorkspaceFolder}/install.sh",
+
+  // Set default shell to zsh
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "zsh": {
+            "path": "/bin/zsh"
+          }
+        }
+      },
+      "extensions": [
+        // Add recommended VS Code extensions here
+        "github.copilot",
+        "github.copilot-chat",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+
+  // Environment variables
+  "remoteEnv": {
+    "DOTFILES_DIR": "${containerWorkspaceFolder}",
+    "STARSHIP_CONFIG": "${containerWorkspaceFolder}/.config/starship.toml"
+  },
+
+  // Forward ports if needed for web development
+  // "forwardPorts": [3000, 8080],
+
+  // Run as non-root user
+  "remoteUser": "codespace"
+}
