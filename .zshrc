@@ -29,5 +29,6 @@
 # Show system info on shell start (interactive, non-nested, non-VS Code)
 if [[ -o interactive ]] && [[ -z "$NEOFETCH_SHOWN" ]] && [[ "$TERM_PROGRAM" != "vscode" ]]; then
   export NEOFETCH_SHOWN=1
+  echo ""
   fastfetch
 fi
