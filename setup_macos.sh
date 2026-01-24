@@ -278,10 +278,10 @@ readonly MACOS_DEFAULTS_SCRIPT="$DOTFILES_DIR/Config/set-macOS-defaults.sh"
 if [[ -f "$MACOS_DEFAULTS_SCRIPT" ]]; then
   info "This will configure Finder and other system settings."
   echo ""
-  printf "  ${CYAN}❯${RESET} Apply macOS defaults? (y/N): "
+  printf "  ${CYAN}❯${RESET} Apply macOS defaults? (Y/n): "
   read -r apply_defaults
   
-  if [[ "$apply_defaults" =~ ^[Yy]$ ]]; then
+  if [[ ! "$apply_defaults" =~ ^[Nn]$ ]]; then
     echo ""
     info "Applying macOS system preferences..."
     
