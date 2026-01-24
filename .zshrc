@@ -20,7 +20,7 @@
 [[ -f ~/.zsh/autocomplete.sh ]] && source ~/.zsh/autocomplete.sh
 
 # Monokai theme for Zsh (load before prompt)
-[[ -f ~/.zsh/monokai-style.zsh ]] && source ~/.zsh/monokai.app
+[[ -f ~/.zsh/monokai-style.zsh ]] && source ~/.zsh/monokai-style.zsh
 [[ -f ~/.zsh/monokai.zsh ]] && source ~/.zsh/monokai.zsh
 
 # Terminal prompt configuration (Starship)
