@@ -64,9 +64,9 @@ error() {
 section() {
   local title="$1"
   echo ""
-  printf "${BOLD}${CYAN}┌──────────────────────────────────────────────────────────────────────────────┐${RESET}\n"
-  printf "${BOLD}${CYAN}│${RESET}  ${BOLD}%s${RESET}\n" "$title"
-  printf "${BOLD}${CYAN}└──────────────────────────────────────────────────────────────────────────────┘${RESET}\n"
+  printf "${BOLD}${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}\n"
+  printf "${BOLD}${CYAN}  ${RESET}  ${BOLD}%s${RESET}\n" "$title"
+  printf "${BOLD}${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}\n"
   echo ""
 }
 
@@ -160,7 +160,7 @@ declare -a CODESPACES_LINKS=(
 echo ""
 printf "${BOLD}${MAGENTA}╔══════════════════════════════════════════════════════════════════════════════╗${RESET}\n"
 printf "${BOLD}${MAGENTA}║${RESET}                                                                              ${BOLD}${MAGENTA}║${RESET}\n"
-printf "${BOLD}${MAGENTA}║${RESET}   ${BOLD}🔗  Dotfiles Installation${RESET}                                                ${BOLD}${MAGENTA}║${RESET}\n"
+printf "${BOLD}${MAGENTA}║${RESET}   ${BOLD}🔗  Dotfiles Installation${RESET}                                                  ${BOLD}${MAGENTA}║${RESET}\n"
 printf "${BOLD}${MAGENTA}║${RESET}                                                                              ${BOLD}${MAGENTA}║${RESET}\n"
 printf "${BOLD}${MAGENTA}╚══════════════════════════════════════════════════════════════════════════════╝${RESET}\n"
 echo ""
