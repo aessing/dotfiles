@@ -131,6 +131,9 @@ declare -a COMMON_LINKS=(
   
   # Starship prompt
   ".config/starship.toml:$XDG_CONFIG_HOME/starship.toml"
+  
+  # Fastfetch system info
+  ".config/fastfetch:$XDG_CONFIG_HOME/fastfetch"
 )
 
 # macOS-only files
