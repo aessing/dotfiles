@@ -78,6 +78,7 @@
     fp = fetch --prune                                  # Fetch and remove deleted remote branches
     fap = fetch --all --prune                           # Fetch all remotes and prune
     pl = pull                                           # Fetch and integrate changes
+    plr = pull --rebase                                 # Pull with rebasing
     plnr = pull --no-rebase                             # Pull without rebasing
     ps = push                                           # Upload local commits to remote
     st = status                                         # Show working tree status
@@ -117,6 +118,12 @@
     # Sync all remotes: fetch, prune, and show status
     sync = "!git fetch --all --prune && git status -sb"
 
+    # Reset current branch to remote (use with caution!)
+    sync-hard = "!git fetch --all --prune && git reset --hard origin/$(git branch --show-current)"
+    
+    # Fetch all and switch to updated main branch
+    sync-main = "!git fetch --all --prune && git checkout main && git reset --hard origin/main"
+    
 # -----------------------------------------------------------------------------
 # MERGE SETTINGS
 # Configure merge tool and behavior
