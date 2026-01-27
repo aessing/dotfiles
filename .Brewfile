@@ -77,6 +77,7 @@ cask "github-copilot-for-xcode"
 cask "insta360-studio"
 cask "ledger-wallet"
 cask "lens"
+cask "logi-options+"
 cask "motu-m-series"
 cask "mqtt-explorer"
 cask "native-access"
@@ -92,6 +93,7 @@ cask "send-to-kindle"
 cask "simplemind"
 cask "steam"
 cask "steelseries-gg"
+cask "tiptoi-manager"
 cask "transmit"
 cask "typeface"
 cask "visual-studio-code"
@@ -101,7 +103,6 @@ cask "yubico-authenticator"
 mas "1Password for Safari", id: 1569813296
 mas "Amphetamine", id: 937984704
 mas "AusweisApp", id: 948660805
-mas "Blackmagic Disk Speed Test", id: 425264550
 mas "Brother P-touch Editor", id: 1453365242
 mas "Compressor", id: 424390742
 mas "Developer", id: 640199958
