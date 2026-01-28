@@ -104,28 +104,29 @@ mas "1Password for Safari", id: 1569813296
 mas "Amphetamine", id: 937984704
 mas "AusweisApp", id: 948660805
 mas "Brother P-touch Editor", id: 1453365242
-mas "Compressor", id: 424390742
+mas "Compressor", id: 6746516157
 mas "Developer", id: 640199958
 mas "Discovery", id: 1381004916
-mas "Final Cut Pro", id: 424389933
+mas "Final Cut Pro", id: 1631624924
 mas "Flighty", id: 1358823008
 mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
 mas "Keka", id: 470158793
-mas "Keynote", id: 409183694
+mas "Keynote", id: 361285480
 mas "Kindle", id: 302584613
-mas "Logic Pro", id: 634148309
+mas "Logic Pro", id: 1615087040
 mas "Magnet", id: 441258766
+mas "MainStage", id: 6746637089
 mas "Metapho", id: 914457352
-mas "Motion", id: 434290957
+mas "Motion", id: 6746637149
 mas "Nautik", id: 1672838783
-mas "Numbers", id: 409203825
-mas "Pages", id: 409201541
+mas "Numbers", id: 361304891
+mas "Pages", id: 361309726
 mas "Parachute", id: 6748614170
 mas "PDF Expert", id: 1055273043
 mas "Perplexity", id: 6714467650
 mas "Photomator", id: 1444636541
-mas "Pixelmator Pro", id: 1289583905
+mas "Pixelmator Pro", id: 6746662575
 mas "Prompt", id: 1594420480
 mas "Shazam", id: 897118787
 mas "Speedtest", id: 1153157709
