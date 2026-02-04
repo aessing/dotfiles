@@ -20,8 +20,6 @@ brew "zsh-syntax-highlighting"
 cask "1password"
 cask "1password-cli"
 cask "beyond-compare"
-cask "chatgpt"
-cask 'codex'
 cask "copilot-cli"
 cask "drawio"
 cask "font-caskaydia-cove-nerd-font"
