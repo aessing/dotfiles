@@ -196,7 +196,6 @@
     # Git Credential Manager for secure credential storage
     # Using bare command name - Git will find it in PATH (works with any Homebrew prefix)
     helper = git-credential-manager
-	helper = 
 	helper = /usr/local/share/gcm-core/git-credential-manager
 
 [credential "https://dev.azure.com"]
