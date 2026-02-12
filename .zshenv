@@ -29,7 +29,7 @@ elif [[ -x /usr/local/bin/brew ]]; then
 fi
 
 # Path variable
-export PATH=/usr/local/bin:/usr/local/sbin:"$PATH"
+export PATH="$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 
 # Add .local/bin to PATH if it exists
 # Used for uv installations.
