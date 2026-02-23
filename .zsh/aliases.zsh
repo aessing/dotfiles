@@ -44,3 +44,8 @@ alias tvos-list="xcrun simctl list devices tv"
 alias watchos="xcrun simctl boot 'Apple Watch Ultra 3 (49mm)' 2>/dev/null; open -a Simulator"
 alias watchos-list="xcrun simctl list devices watch"
 alias rmxdd="rm -rf ~/Library/Developer/Xcode/DerivedData"
+
+# DBX specific aliases
+if [[ -f /usr/local/bin/dbexec ]]; then
+  alias llm='dbexec repo run llm'
+fi
