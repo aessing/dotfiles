@@ -61,4 +61,4 @@ if [[ -z ${WARP_IS_LOCAL_SHELL_SESSION} ]]; then
 fi
 
 # Load Starship
-eval "$(starship init zsh)"
+command -v starship &>/dev/null && eval "$(starship init zsh)"
