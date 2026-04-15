@@ -6,6 +6,9 @@
 # Installation: brew install nvm
 # =============================================================================
 
+# Disable Next.js telemetry
+export NEXT_TELEMETRY_DISABLED=1
+
 export NVM_DIR="$HOME/.nvm"
 
 # Load NVM if installed via Homebrew
