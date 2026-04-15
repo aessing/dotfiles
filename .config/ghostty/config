@@ -1,0 +1,28 @@
+# Theme
+theme = Monokai_Pro
+
+# Font
+font-family = JetBrainsMono Nerd Font Mono
+font-size = 14
+font-thicken = true
+adjust-cell-height = 2
+
+# Window
+window-padding-x = 8
+window-padding-y = 8
+background-opacity = 0.95
+unfocused-split-opacity = 0.9
+
+# Behavior
+copy-on-select = clipboard
+mouse-hide-while-typing = true
+confirm-close-surface = false
+shell-integration-features = no-cursor
+
+# macOS
+macos-option-as-alt = true
+macos-titlebar-style = tabs
+window-save-state = always
+
+# Clipboard
+clipboard-paste-protection = false

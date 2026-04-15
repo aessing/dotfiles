@@ -18,9 +18,10 @@ function extract() {
     *.tar.gz)  tar xzf $1 ;;
     *.zip)     unzip $1 ;;
     *.gz)      gunzip $1 ;;
+    *.7z)      7zz x $1 ;;
     *)         echo "Unknown format" ;;
   esac
 }
+
 # Create directory and cd into it
 function mkcd() { mkdir -p "$1" && cd "$1" }
-

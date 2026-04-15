@@ -13,9 +13,13 @@
 [[ -f ~/.zsh/docker.zsh ]] && source ~/.zsh/docker.zsh
 [[ -f ~/.zsh/dotnet.zsh ]] && source ~/.zsh/dotnet.zsh
 [[ -f ~/.zsh/gcp.zsh ]] && source ~/.zsh/gcp.zsh
+[[ -f ~/.zsh/gemini.zsh ]] && source ~/.zsh/gemini.zsh
 [[ -f ~/.zsh/homebrew.zsh ]] && source ~/.zsh/homebrew.zsh
+[[ -f ~/.zsh/mole.zsh ]] && source ~/.zsh/mole.zsh
+[[ -f ~/.zsh/obsidian.zsh ]] && source ~/.zsh/obsidian.zsh
 [[ -f ~/.zsh/nvm.zsh ]] && source ~/.zsh/nvm.zsh
 [[ -f ~/.zsh/python.zsh ]] && source ~/.zsh/python.zsh
+[[ -f ~/.zsh/terraform.zsh ]] && source ~/.zsh/terraform.zsh
 
 # Autocomplete and suggestions
 [[ -f ~/.zsh/autocomplete.sh ]] && source ~/.zsh/autocomplete.sh
@@ -24,11 +28,11 @@
 [[ -f ~/.zsh/monokai-style.zsh ]] && source ~/.zsh/monokai-style.zsh
 [[ -f ~/.zsh/monokai.zsh ]] && source ~/.zsh/monokai.zsh
 
+# Databricks specific configuration
+[[ -f ~/.zsh/databricks.zsh ]] && source ~/.zsh/dbx.zsh
+
 # Terminal prompt configuration (Starship)
 [[ -f ~/.zsh/starship.zsh ]] && source ~/.zsh/starship.zsh
-
-# DBX specific configuration
-[[ -f ~/.zsh/dbx.zsh ]] && source ~/.zsh/dbx.zsh
 
 # Show system info on shell start (interactive, non-nested, non-VS Code)
 if [[ -o interactive ]] && [[ -z "$NEOFETCH_SHOWN" ]] && [[ "$TERM_PROGRAM" != "vscode" ]]; then
