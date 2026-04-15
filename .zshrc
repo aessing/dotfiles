@@ -29,7 +29,7 @@
 [[ -f ~/.zsh/monokai.zsh ]] && source ~/.zsh/monokai.zsh
 
 # Databricks specific configuration
-[[ -f ~/.zsh/databricks.zsh ]] && source ~/.zsh/dbx.zsh
+[[ -f ~/.zsh/databricks.zsh ]] && source ~/.zsh/databricks.zsh
 
 # Terminal prompt configuration (Starship)
 [[ -f ~/.zsh/starship.zsh ]] && source ~/.zsh/starship.zsh
