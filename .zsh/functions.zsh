@@ -13,12 +13,20 @@ function colormap() {
 
 # Extract any archive
 function extract() {
-  case $1 in
-    *.tar.bz2) tar xjf $1 ;;
-    *.tar.gz)  tar xzf $1 ;;
-    *.zip)     unzip $1 ;;
-    *.gz)      gunzip $1 ;;
-    *.7z)      7zz x $1 ;;
+  case "$1" in
+    *.tar.bz2) tar xjf "$1" ;;
+    *.tar.gz)  tar xzf "$1" ;;
+    *.zip)     unzip "$1" ;;
+    *.gz)      gunzip "$1" ;;
+    *.7z)
+      if command -v 7z >/dev/null 2>&1; then
+        7z x "$1"
+      elif command -v 7zz >/dev/null 2>&1; then
+        7zz x "$1"
+      else
+        echo "7z/7zz not found"
+      fi
+      ;;
     *)         echo "Unknown format" ;;
   esac
 }
