@@ -44,3 +44,6 @@ alias tvos-list="xcrun simctl list devices tv"
 alias watchos="xcrun simctl boot 'Apple Watch Ultra 3 (49mm)' 2>/dev/null; open -a Simulator"
 alias watchos-list="xcrun simctl list devices watch"
 alias rmxdd="rm -rf ~/Library/Developer/Xcode/DerivedData"
+
+# Podman (if installed)
+alias docker="podman"
