@@ -1,5 +1,5 @@
 # Theme
-theme = dark:Monokai_Pro,light:Monokai_Pro
+theme = dark:Monokai_Pro,light:Monokai_Pro_Light
 
 # Font
 font-family = JetBrainsMono Nerd Font Mono
