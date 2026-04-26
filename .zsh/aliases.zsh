@@ -45,5 +45,8 @@ alias watchos="xcrun simctl boot 'Apple Watch Ultra 3 (49mm)' 2>/dev/null; open 
 alias watchos-list="xcrun simctl list devices watch"
 alias rmxdd="rm -rf ~/Library/Developer/Xcode/DerivedData"
 
+# Fastfetch (if installed)
+alias ff="clear; fastfetch"
+
 # Podman (if installed)
 alias docker="podman"
