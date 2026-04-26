@@ -48,5 +48,8 @@ alias rmxdd="rm -rf ~/Library/Developer/Xcode/DerivedData"
 # Fastfetch (if installed)
 alias ff="clear; fastfetch"
 
+# Claude (if installed)
+alias claudesec="claude --dangerously-skip-permissions"
+
 # Podman (if installed)
 alias docker="podman"
