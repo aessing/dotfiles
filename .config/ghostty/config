@@ -11,8 +11,8 @@ adjust-cell-height = 2
 title =
 window-padding-x = 8
 window-padding-y = 8
-background-opacity = 0.9
-unfocused-split-opacity = 0.85
+background-opacity = 0.95
+unfocused-split-opacity = 0.9
 window-inherit-working-directory = true
 window-inherit-font-size = true
 
