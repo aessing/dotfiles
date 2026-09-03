@@ -31,6 +31,9 @@ Applies to emails, Slack messages, PR comments, tickets, documents, and customer
 
 - Match the existing project structure, naming, formatting, and conventions.
 - Keep changes focused on the request and avoid unrelated refactors.
+- Prefer simple functions and composition, but follow the existing project style when it differs.
+- In comments, explain why something exists, not what the code plainly does.
+- Flag likely bugs or risky behavior you notice, even when they are slightly outside the direct request.
 - Verify code when possible before presenting it as complete.
 - For Python, check syntax and imports when possible.
 - For CLI tools, test the actual command invocation when possible.
